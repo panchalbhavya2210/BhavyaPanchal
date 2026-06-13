@@ -81,7 +81,7 @@
 					<Typography variant="caption">What I Do</Typography>
 
 					<div class="mt-8 space-y-5">
-						{#each expertise as item}
+						{#each expertise as item (item)}
 							<div class="flex items-center gap-4">
 								<div class="size-2 rounded-full bg-primary"></div>
 
@@ -97,7 +97,7 @@
 					<Typography variant="caption">Tech I Work With</Typography>
 
 					<div class="mt-8 flex flex-wrap gap-3">
-						{#each technologies as tech}
+						{#each technologies as tech (tech)}
 							<span
 								class="border border-border px-4 py-2 text-sm transition-colors hover:border-primary"
 							>

@@ -58,6 +58,34 @@ export const sitemapEntries: SitemapEntry[] = [
 		priority: 1.0,
 		title: 'Bhavya Panchal — Frontend Developer Portfolio',
 		lastmod: '2026-06-13'
+	},
+	{
+		path: '/#about',
+		changefreq: 'monthly',
+		priority: 0.8,
+		title: 'About — Bhavya Panchal',
+		lastmod: '2026-06-13'
+	},
+	{
+		path: '/#projects',
+		changefreq: 'monthly',
+		priority: 0.9,
+		title: 'Projects — Bhavya Panchal',
+		lastmod: '2026-06-13'
+	},
+	{
+		path: '/#stack',
+		changefreq: 'monthly',
+		priority: 0.7,
+		title: 'Tech Stack — Bhavya Panchal',
+		lastmod: '2026-06-13'
+	},
+	{
+		path: '/#contact',
+		changefreq: 'monthly',
+		priority: 0.8,
+		title: 'Contact — Bhavya Panchal',
+		lastmod: '2026-06-13'
 	}
 ];
 

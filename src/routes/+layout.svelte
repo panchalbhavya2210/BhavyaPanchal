@@ -23,6 +23,9 @@
 	const ogImage = absoluteUrl(site.image);
 	const canonical = absoluteUrl($page.url.pathname);
 	const schemas = allSchemas();
+	const schemaTags = schemas
+		.map((s) => '<script type="application/ld+json">' + JSON.stringify(s) + '</' + 'script>')
+		.join('\n');
 </script>
 
 <svelte:head>
@@ -64,9 +67,7 @@
 	<meta name="twitter:site" content={site.twitter} />
 
 	<!-- JSON-LD Structured Data -->
-	{#each schemas as schema}
-		{@html `<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
-	{/each}
+	{@html schemaTags}
 </svelte:head>
 
 <Header />

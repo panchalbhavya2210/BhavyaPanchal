@@ -3,7 +3,7 @@ import { dev } from '$app/environment';
 export const site = {
 	name: 'Bhavya Panchal — Frontend Developer',
 	tagline: 'Design, Code & Craft',
-	url: dev ? 'http://localhost:5173' : 'https://bhavyapanchal.vercel.app',
+	url: dev ? 'http://localhost:5173' : 'https://bhavyapanchal.in',
 	titleSeparator: ' — ',
 	description:
 		'Portfolio of Bhavya Panchal, a frontend developer & UI engineer from Ahmedabad, India. Crafting fast, accessible, and scalable digital experiences with SvelteKit, TypeScript, GSAP, and modern web technologies.',

@@ -1,6 +1,6 @@
-# https://bhavyapanchal.vercel.app
+# https://bhavyapanchal.in
 User-agent: *
 Allow: /
 Disallow:
 
-Sitemap: https://bhavyapanchal.vercel.app/sitemap.xml
+Sitemap: https://bhavyapanchal.in/sitemap.xml

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
+	import type gsap from 'gsap';
 
 	const links = [
 		{ label: 'About', href: '#about' },
 		{ label: 'Projects', href: '#projects' },
-		{ label: 'Stack', href: '#stack' },
+		{ label: 'Journey', href: '#journey' },
 		{ label: 'Contact', href: '#contact' }
 	];
 
@@ -100,8 +100,11 @@
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		document.addEventListener('click', handleOutsideClick);
+
+		const gsapModule = await import('gsap');
+		const gsap = gsapModule.default;
 
 		tl = gsap.timeline({
 			paused: true
@@ -191,7 +194,11 @@
 	>
 		<div class="flex h-15 items-center justify-between px-6">
 			<div class="flex items-center gap-2.5">
-				<a href="/" class="font-heading text-sm font-semibold tracking-[0.25em] text-black/80 hover:text-black transition-colors" aria-label="Bhavya Panchal — Home">
+				<a
+					href="/"
+					class="font-heading text-sm font-semibold tracking-[0.25em] text-black/80 hover:text-black transition-colors"
+					aria-label="Bhavya Panchal — Home"
+				>
 					BHAVYA
 				</a>
 			</div>

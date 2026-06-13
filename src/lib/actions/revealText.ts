@@ -1,78 +1,96 @@
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { browser } from '$app/environment';
 
 export function revealText(node: HTMLElement, enabled = true) {
-	if (!enabled) return {};
+	if (!browser || !enabled) return { destroy() { } };
 
-	const originalHTML = node.innerHTML;
+	let killed = false;
 
-	const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null);
+	(async () => {
+		const [gsapMod, stMod] = await Promise.all([
+			import('gsap'),
+			import('gsap/ScrollTrigger')
+		]);
+		const gsap = gsapMod.default;
+		const { ScrollTrigger } = stMod;
+		gsap.registerPlugin(ScrollTrigger);
 
-	const textNodes: Text[] = [];
+		if (killed) return;
 
-	while (walker.nextNode()) {
-		textNodes.push(walker.currentNode as Text);
-	}
+		const originalHTML = node.innerHTML;
 
-	textNodes.forEach((textNode) => {
-		const text = textNode.textContent ?? '';
+		const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null);
 
-		const fragment = document.createDocumentFragment();
+		const textNodes: Text[] = [];
 
-		const words = text.split(/(\s+)/);
+		while (walker.nextNode()) {
+			textNodes.push(walker.currentNode as Text);
+		}
 
-		words.forEach((word) => {
-			// preserve spaces
-			if (/^\s+$/.test(word)) {
-				fragment.appendChild(document.createTextNode(word));
-				return;
-			}
+		textNodes.forEach((textNode) => {
+			const text = textNode.textContent ?? '';
 
-			const wordWrap = document.createElement('span');
-			wordWrap.className = 'word-wrap';
+			const fragment = document.createDocumentFragment();
 
-			word.split('').forEach((char) => {
-				const wrap = document.createElement('span');
-				wrap.className = 'char-wrap';
+			const words = text.split(/(\s+)/);
 
-				const inner = document.createElement('span');
-				inner.className = 'char';
-				inner.textContent = char;
+			words.forEach((word) => {
+				// preserve spaces
+				if (/^\s+$/.test(word)) {
+					fragment.appendChild(document.createTextNode(word));
+					return;
+				}
 
-				wrap.appendChild(inner);
-				wordWrap.appendChild(wrap);
+				const wordWrap = document.createElement('span');
+				wordWrap.className = 'word-wrap';
+
+				word.split('').forEach((char) => {
+					const wrap = document.createElement('span');
+					wrap.className = 'char-wrap';
+
+					const inner = document.createElement('span');
+					inner.className = 'char';
+					inner.textContent = char;
+
+					wrap.appendChild(inner);
+					wordWrap.appendChild(wrap);
+				});
+
+				fragment.appendChild(wordWrap);
 			});
 
-			fragment.appendChild(wordWrap);
+			textNode.parentNode?.replaceChild(fragment, textNode);
 		});
 
-		textNode.parentNode?.replaceChild(fragment, textNode);
-	});
+		const chars = node.querySelectorAll('.char');
+		const count = chars.length;
+		const stagger = Math.max(0.01, (0.12 / count) * 10);
+		gsap.set(chars, {
+			yPercent: 110
+		});
 
-	const chars = node.querySelectorAll('.char');
-	const count = chars.length;
-	const stagger = Math.max(0.01, (0.12 / count) * 10);
-	gsap.set(chars, {
-		yPercent: 110
-	});
+		gsap.to(chars, {
+			yPercent: 0,
+			duration: 1.2,
+			stagger,
+			ease: 'power4.out',
+			scrollTrigger: {
+				trigger: node,
+				start: 'top 85%',
+				once: true
+			}
+		});
 
-	gsap.to(chars, {
-		yPercent: 0,
-		duration: 1.2,
-		stagger,
-		ease: 'power4.out',
-		scrollTrigger: {
-			trigger: node,
-			start: 'top 85%',
-			once: true
-		}
-	});
+		// Store cleanup for destroy
+		const cleanupHTML = originalHTML;
+		(node as any).__revealTextCleanup = () => {
+			node.innerHTML = cleanupHTML;
+		};
+	})();
 
 	return {
 		destroy() {
-			node.innerHTML = originalHTML;
+			killed = true;
+			(node as any).__revealTextCleanup?.();
 		}
 	};
 }

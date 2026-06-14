@@ -6,26 +6,34 @@ export const site = {
 	url: dev ? 'http://localhost:5173' : 'https://bhavyapanchal.in',
 	titleSeparator: ' — ',
 	description:
-		'Portfolio of Bhavya Panchal, a frontend developer & UI engineer from Ahmedabad, India. Crafting fast, accessible, and scalable digital experiences with SvelteKit, TypeScript, GSAP, and modern web technologies.',
+		'Bhavya Panchal is a frontend developer and UI engineer based in Ahmedabad, India. Specializing in React, SvelteKit, TypeScript, and modern web technologies to build fast, accessible, and scalable web applications. Available for full-time roles and freelance projects.',
 	keywords: [
 		'Bhavya Panchal',
 		'frontend developer',
+		'frontend developer Ahmedabad',
+		'React developer Ahmedabad',
 		'UI engineer',
-		'web developer portfolio',
+		'web developer Ahmedabad',
+		'UI developer Gujarat',
+		'frontend developer India',
+		'React developer India',
+		'hire frontend developer',
 		'SvelteKit developer',
-		'TypeScript',
+		'Next.js developer',
+		'TypeScript developer',
 		'GSAP',
 		'Tailwind CSS',
-		'Next.js',
 		'Sanity CMS',
 		'design systems',
 		'performance optimization',
-		'accessibility',
+		'web accessibility',
 		'Ahmedabad',
+		'Gujarat',
 		'India',
 		'SolePoint Solutions',
 		'motion design',
-		'UI interactions'
+		'UI interactions',
+		'web developer portfolio'
 	],
 	author: 'Bhavya Panchal',
 	locale: 'en_IN',
@@ -71,35 +79,35 @@ export const sitemapEntries: SitemapEntry[] = [
 		path: '/',
 		changefreq: 'weekly',
 		priority: 1.0,
-		title: 'Bhavya Panchal — Frontend Developer & UI Engineer Portfolio',
+		title: 'Bhavya Panchal — Frontend Developer & UI Engineer | Ahmedabad, India',
 		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
 		path: '/about-me',
 		changefreq: 'monthly',
-		priority: 0.8,
-		title: 'About Bhavya Panchal — Frontend Developer & UI Engineer',
+		priority: 0.9,
+		title: 'About Bhavya Panchal — Frontend Developer & UI Engineer | Ahmedabad',
 		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
 		path: '/projects',
 		changefreq: 'weekly',
 		priority: 0.9,
-		title: 'Projects — Bhavya Panchal | Frontend Developer Portfolio',
+		title: 'Projects — Bhavya Panchal | Frontend Developer Portfolio | Ahmedabad',
 		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
 		path: '/journey',
 		changefreq: 'monthly',
-		priority: 0.7,
-		title: 'Career Journey — Bhavya Panchal | Frontend Developer',
+		priority: 0.8,
+		title: 'Career Journey — Bhavya Panchal | Frontend Developer Ahmedabad',
 		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
 		path: '/contact',
 		changefreq: 'monthly',
 		priority: 0.8,
-		title: 'Contact Bhavya Panchal — Frontend Developer & UI Engineer',
+		title: 'Contact — Hire Bhavya Panchal | Frontend Developer Ahmedabad, India',
 		lastmod: new Date().toISOString().split('T')[0]
 	}
 ];

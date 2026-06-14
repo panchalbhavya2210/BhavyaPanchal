@@ -1,22 +1,23 @@
 User-agent: *
 Allow: /
-Disallow:
+
+# Sitemap
+Sitemap: https://bhavyapanchal.in/sitemap.xml
 
 # Crawl delay (polite crawling)
 Crawl-delay: 10
 
-# Sitemaps
-Sitemap: https://bhavyapanchal.in/sitemap.xml
-
-# Specific bots
+# Googlebot
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
 
+# Bingbot
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
+# Other search engines
 User-agent: Applebot
 Allow: /
 
@@ -26,7 +27,13 @@ Allow: /
 User-agent: Baiduspider
 Allow: /
 
-# Disallow known sensitive paths
-User-agent: *
+User-agent: YandexBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Disallow known sensitive / internal paths
 Disallow: /cdn-cgi/
 Disallow: /.well-known/
+Disallow: /api/

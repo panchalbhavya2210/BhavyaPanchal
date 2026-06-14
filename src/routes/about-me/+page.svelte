@@ -6,11 +6,11 @@
 	import { breadcrumbSchema } from '$lib/seo';
 
 	const meta = {
-		title: 'About — Bhavya Panchal',
+		title: 'About — Bhavya Panchal | Frontend Developer & UI Engineer, Ahmedabad',
 		description:
-			'Learn about Bhavya Panchal — a frontend developer and UI engineer based in Ahmedabad, India. Expertise in design systems, performance optimization, and modern web technologies.',
+			'Learn about Bhavya Panchal — a frontend developer and UI engineer based in Ahmedabad, India. Expertise in React, SvelteKit, TypeScript, design systems, performance optimization, and modern web technologies. Currently working at SolePoint Solutions.',
 		keywords:
-			'about Bhavya Panchal, frontend developer Ahmedabad, UI engineer India, web developer bio, SvelteKit developer, TypeScript, GSAP',
+			'about Bhavya Panchal, frontend developer Ahmedabad, UI engineer India, web developer bio, SvelteKit developer, TypeScript developer, React developer, hire frontend developer Gujarat, SolePoint Solutions',
 		path: '/about-me',
 		type: 'profile'
 	} as const;

@@ -43,20 +43,26 @@
 								{featuredProject.title}
 							</Typography>
 
-							<div class="space-y-2">
-								<div class="flex flex-wrap gap-2 text-xs uppercase tracking-wider text-white">
-									{#each featuredProject.stack as tech, i (i)}
-										<span>{tech}</span>
-										{#if i < featuredProject.stack.length - 1}
-											<span class="text-primary">•</span>
-										{/if}
-									{/each}
-								</div>
+					<div class="space-y-2">
+						<div class="flex flex-wrap gap-2 text-xs uppercase tracking-wider text-white">
+							{#each featuredProject.stack as tech, i (i)}
+								<span>{tech}</span>
+								{#if i < featuredProject.stack.length - 1}
+									<span class="text-primary">•</span>
+								{/if}
+							{/each}
+						</div>
 
-								<Typography variant="bodySm" class="uppercase text-white/70">
-									{featuredProject.category}
-								</Typography>
-							</div>
+						<Typography variant="bodySm" class="uppercase text-white/70">
+							{featuredProject.category}
+						</Typography>
+
+						<div class="flex flex-wrap gap-x-4 gap-y-1">
+							{#each featuredProject.outcomes as outcome (outcome)}
+								<span class="text-xs text-primary/80">{outcome}</span>
+							{/each}
+						</div>
+					</div>
 						</div>
 
 						<div class="flex items-center justify-between">
@@ -106,6 +112,12 @@
 								<Typography variant="bodySm" class="uppercase text-white/60">
 									{project.category}
 								</Typography>
+
+								<div class="flex flex-wrap gap-x-3 gap-y-0.5">
+									{#each project.outcomes as outcome (outcome)}
+										<span class="text-[10px] text-primary/70">{outcome}</span>
+									{/each}
+								</div>
 							</div>
 
 							{#if project.href !== ''}
@@ -158,6 +170,12 @@
 								<Typography variant="bodySm" class="uppercase text-white/60">
 									{project.category}
 								</Typography>
+
+								<div class="flex flex-wrap gap-x-3 gap-y-0.5">
+									{#each project.outcomes as outcome (outcome)}
+										<span class="text-[10px] text-primary/70">{outcome}</span>
+									{/each}
+								</div>
 							</div>
 
 							{#if project.href !== ''}

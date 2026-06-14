@@ -7,14 +7,14 @@
 	import Arrow from '@lucide/svelte/icons/arrow-up-right';
 	import SeoMeta from '$lib/components/seo-meta.svelte';
 	import JsonLd from '$lib/components/json-ld.svelte';
-	import { site, webSiteSchema } from '$lib/seo';
+	import { site, webSiteSchema, personSchema, organizationSchema, portfolioSchema } from '$lib/seo';
 
 	const meta = {
-		title: `${site.name} — Frontend Developer &amp; UI Engineer`,
+		title: `${site.name} — Frontend Developer &amp; UI Engineer | Ahmedabad, India`,
 		description:
-			'Bhavya Panchal is a frontend developer and UI engineer from Ahmedabad, India. Crafting fast, accessible, and scalable digital experiences with modern web technologies.',
+			'Bhavya Panchal is a frontend developer and UI engineer from Ahmedabad, India. Crafting fast, accessible, and scalable digital experiences with React, SvelteKit, TypeScript, and modern web technologies. Available for hire.',
 		keywords:
-			'Bhavya Panchal, frontend developer, UI engineer, web developer, portfolio, SvelteKit, TypeScript, GSAP, Ahmedabad',
+			'Bhavya Panchal, frontend developer Ahmedabad, React developer Ahmedabad, UI engineer India, hire frontend developer, SvelteKit developer, web developer portfolio, TypeScript developer, Next.js developer, Ahmedabad, Gujarat',
 		path: '/',
 		image: site.image,
 		type: 'website'
@@ -22,7 +22,7 @@
 </script>
 
 <SeoMeta {meta} />
-<JsonLd schemas={[webSiteSchema()]} />
+<JsonLd schemas={[webSiteSchema(), personSchema(), organizationSchema(), portfolioSchema()]} />
 
 <Banner />
 

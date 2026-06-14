@@ -5,11 +5,11 @@
 	import { breadcrumbSchema } from '$lib/seo';
 
 	const meta = {
-		title: 'Contact — Bhavya Panchal',
+		title: 'Contact — Bhavya Panchal | Hire Frontend Developer Ahmedabad',
 		description:
-			'Get in touch with Bhavya Panchal — frontend developer and UI engineer based in Ahmedabad, India. Available for freelance projects, collaborations, and full-time opportunities.',
+			'Get in touch with Bhavya Panchal — frontend developer and UI engineer based in Ahmedabad, India. Available for full-time roles, freelance projects, and collaborations. Expert in React, SvelteKit, and TypeScript.',
 		keywords:
-			'contact Bhavya Panchal, hire frontend developer, freelance UI engineer, Ahmedabad web developer, SvelteKit developer for hire',
+			'hire frontend developer Ahmedabad, contact Bhavya Panchal, hire React developer India, freelance UI engineer, Ahmedabad web developer, SvelteKit developer for hire, frontend developer available',
 		path: '/contact',
 		type: 'website'
 	} as const;

@@ -6,11 +6,11 @@
 	import { featuredProject, projects } from '$lib/data/projects';
 
 	const meta = {
-		title: 'Projects — Bhavya Panchal',
+		title: 'Projects — Bhavya Panchal | Frontend Developer Portfolio',
 		description:
-			'Explore selected projects by Bhavya Panchal — corporate websites, e-commerce platforms, analytics dashboards, and custom web applications built with modern technologies.',
+			'Explore selected projects by Bhavya Panchal — corporate websites, e-commerce platforms, analytics dashboards, and custom web applications built with React, SvelteKit, TypeScript, and modern frontend technologies.',
 		keywords:
-			'Bhavya Panchal projects, frontend portfolio, web development projects, SvelteKit projects, React projects, UI engineering showcase',
+			'Bhavya Panchal projects, frontend developer portfolio Ahmedabad, React developer projects, SvelteKit projects, web development portfolio, UI engineering showcase, hire frontend developer Ahmedabad',
 		path: '/projects',
 		type: 'website'
 	} as const;

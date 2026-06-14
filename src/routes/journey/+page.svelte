@@ -5,11 +5,11 @@
 	import { breadcrumbSchema } from '$lib/seo';
 
 	const meta = {
-		title: 'Journey — Bhavya Panchal',
+		title: 'Journey — Bhavya Panchal | Frontend Developer Career Timeline',
 		description:
-			'Explore the career journey of Bhavya Panchal — from early beginnings in web development to building scalable applications at SolePoint Solutions.',
+			'Explore the career journey of Bhavya Panchal — from early beginnings in web development to building scalable applications at SolePoint Solutions. Frontend developer with 3+ years of experience in Ahmedabad, India.',
 		keywords:
-			'Bhavya Panchal career, frontend developer experience, web developer journey, UI engineer career timeline, SolePoint Solutions',
+			'Bhavya Panchal career, frontend developer experience Ahmedabad, web developer journey, UI engineer career timeline, SolePoint Solutions, hire frontend developer India, React developer career',
 		path: '/journey',
 		type: 'website'
 	} as const;

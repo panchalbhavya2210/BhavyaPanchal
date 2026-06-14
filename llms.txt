@@ -1,0 +1,65 @@
+# Bhavya Panchal — Portfolio
+
+> Personal portfolio and website for Bhavya Panchal, a frontend developer & UI engineer from Ahmedabad, India.
+
+## Tech Stack
+
+- **Framework**: SvelteKit (Svelte 5 with runes mode)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animation**: GSAP, Lenis (smooth scroll)
+- **UI Components**: shadcn-svelte, Lucide icons
+- **Content**: MDsveX (.svx / .md files)
+- **Deployment**: Vercel (adapter-vercel)
+- **Package Manager**: yarn
+- **Extras**: ESLint, Prettier, nodemailer (contact form)
+
+## Project Structure
+
+```
+src/
+├── lib/
+│   ├── components/      # Svelte components (banner, header, footer, about, projects, contact, etc.)
+│   │   └── ui/          # Reusable UI primitives (button, container, section, typography)
+│   ├── data/            # Static data (projects list)
+│   ├── actions/         # Svelte actions
+│   ├── hooks/           # SvelteKit hooks
+│   ├── email/           # Email utilities (nodemailer)
+│   ├── seo.ts           # SEO metadata & JSON-LD schemas
+│   └── utils.ts         # Shared utilities
+├── routes/
+│   ├── +page.svelte     # Home page
+│   ├── about-me/        # About page
+│   ├── journey/         # Career journey / experience page
+│   ├── projects/        # Projects showcase
+│   ├── contact/         # Contact form (+page.server.ts with nodemailer)
+│   └── api/             # API endpoints
+└── app.html             # HTML shell template
+```
+
+## Scripts
+
+| Command           | Description                    |
+| ----------------- | ------------------------------ |
+| `yarn dev`        | Start dev server               |
+| `yarn build`      | Production build               |
+| `yarn preview`    | Preview production build       |
+| `yarn check`      | Type-check with svelte-check   |
+| `yarn lint`       | Prettier check + ESLint        |
+| `yarn format`     | Format with Prettier           |
+
+## Key Configuration
+
+- **Vite config**: `vite.config.ts` — Tailwind CSS v4 Vite plugin, SvelteKit with runes mode + async, MDsveX preprocessor, adapter-vercel
+- **TypeScript**: `tsconfig.json`
+- **ESLint**: `eslint.config.js` — flat config with eslint-plugin-svelte and prettier
+- **Prettier**: `.prettierrc` with `prettier-plugin-svelte` and `prettier-plugin-tailwindcss`
+- **shadcn-svelte**: `components.json`
+
+## Notes
+
+- All `$lib` imports resolve to `src/lib/`
+- Site is deployed on Vercel
+- Contact form uses nodemailer via a SvelteKit form action (`+page.server.ts`)
+- The project uses Svelte 5 runes mode (`$state`, `$derived`, `$effect`, `$props`)
+- Environment variables in `.env` (see `.env.example` for template)

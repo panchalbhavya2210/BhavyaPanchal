@@ -52,7 +52,7 @@
 
 		{#if Icon}
 			<span
-				class={`absolute right-2 z-0 h-10 w-10 rounded transition-all duration-500 ease-in-out group-hover:scale-[1000%] group-hover:rounded-[100px] ${variants[variant].overlay}`}
+				class={`absolute right-2 z-0 h-10 w-10 rounded-0 transition-all duration-500 ease-in-out group-hover:scale-[1200%] group-hover:rounded-[100px] ${variants[variant].overlay}`}
 			></span>
 
 			<span class="relative z-10 flex h-14 w-14 items-center justify-center overflow-hidden">

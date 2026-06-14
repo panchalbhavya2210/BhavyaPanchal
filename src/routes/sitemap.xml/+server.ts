@@ -1,6 +1,17 @@
 import { sitemapEntries, absoluteUrl } from '$lib/seo';
+import { posts } from '$lib/data/blog';
 
 const pages = [...sitemapEntries];
+
+const blogEntries = posts.map((post) => ({
+	path: `/blog/${post.slug}`,
+	lastmod: post.date,
+	changefreq: 'monthly' as const,
+	priority: 0.7,
+	title: post.title
+}));
+
+pages.push(...blogEntries);
 
 export async function GET() {
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

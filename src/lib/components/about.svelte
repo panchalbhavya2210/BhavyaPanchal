@@ -2,6 +2,7 @@
 	import Container from './ui/container.svelte';
 	import Section from './ui/section.svelte';
 	import Typography from './ui/typography.svelte';
+	import { reveal } from '$lib/actions/reveal';
 
 	const expertise = [
 		'Frontend Development',
@@ -50,23 +51,19 @@
 
 				<div class="flex flex-col justify-between border-l border-border pl-8">
 					<div class="space-y-10">
-						<div>
+						<div use:reveal={0}>
 							<Typography variant="caption">Location</Typography>
-
 							<Typography variant="h4" class="mt-2 font-normal">Ahmedabad, India</Typography>
 						</div>
 
-						<div>
+						<div use:reveal={0.08}>
 							<Typography variant="caption">Currently</Typography>
-
 							<Typography variant="h4" class="mt-2 font-normal">Web Developer</Typography>
-
 							<Typography variant="body" color="muted">SolePoint Solutions</Typography>
 						</div>
 
-						<div>
+						<div use:reveal={0.16}>
 							<Typography variant="caption">Focus</Typography>
-
 							<Typography variant="bodyLg" class="mt-2">
 								Clean UI, performance, accessibility and scalable frontend architecture.
 							</Typography>
@@ -81,8 +78,8 @@
 					<Typography variant="caption">What I Do</Typography>
 
 					<div class="mt-8 space-y-5">
-						{#each expertise as item (item)}
-							<div class="flex items-center gap-4">
+						{#each expertise as item, i (item)}
+							<div class="flex items-center gap-4" use:reveal={i * 0.06}>
 								<div class="size-2 rounded-full bg-primary"></div>
 
 								<Typography variant="bodyLg">

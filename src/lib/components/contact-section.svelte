@@ -6,6 +6,7 @@
 	import Typography from './ui/typography.svelte';
 	import { ArrowUpRight, Mail, Phone, MapPin, CheckCircle, AlertCircle } from '@lucide/svelte';
 	import FooterImg from '../assets/bhavya-panchal-footer.jpg';
+	import { reveal } from '$lib/actions/reveal';
 	let form = $state({
 		name: '',
 		email: '',
@@ -38,7 +39,7 @@
 			<div class="grid lg:grid-cols-[1fr_1fr_420px] mt-8">
 				<div class="space-y-12">
 					<div class="space-y-5 mt-auto max-md:mb-6">
-						<div class="flex items-center gap-4">
+						<div class="flex items-center gap-4" use:reveal={0}>
 							<div class="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
 								<Mail class="size-4 text-primary" />
 							</div>
@@ -48,7 +49,7 @@
 							</div>
 						</div>
 
-						<div class="flex items-center gap-4">
+						<div class="flex items-center gap-4" use:reveal={0.08}>
 							<div class="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
 								<Phone class="size-4 text-primary" />
 							</div>
@@ -58,7 +59,7 @@
 							</div>
 						</div>
 
-						<div class="flex items-center gap-4">
+						<div class="flex items-center gap-4" use:reveal={0.16}>
 							<div class="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
 								<MapPin class="size-4 text-primary" />
 							</div>

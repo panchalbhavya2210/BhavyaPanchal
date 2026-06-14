@@ -5,6 +5,7 @@
 	import ButtonPrimary from './ui/button-primary.svelte';
 	import Arrow from '@lucide/svelte/icons/arrow-up-right';
 	import Grid from './ui/grid.svelte';
+	import { reveal } from '$lib/actions/reveal';
 </script>
 
 <div class="relative min-h-screen overflow-hidden max-sm:pt-20 bg-[#d0c8ca]">
@@ -28,12 +29,12 @@
 						>CRAFTING MEANINGFUL EXPERIENCES WITH PRECISION.</Typography
 					>
 				</div>
-				<div class="mt-8 flex flex-wrap gap-4">
+				<div class="mt-8 flex flex-wrap gap-4" use:reveal={0.35}>
 					<ButtonPrimary href="/projects" icon={Arrow}>VIEW PROJECTS</ButtonPrimary>
 					<ButtonPrimary href="/contact" variant="secondary" icon={Arrow}>GET IN TOUCH</ButtonPrimary>
 				</div>
 			</div>
-			<div class="h-full">
+			<div class="h-full" use:reveal={0.2}>
 				<img
 					src={Bhavya}
 					width="720"

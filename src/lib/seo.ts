@@ -104,6 +104,13 @@ export const sitemapEntries: SitemapEntry[] = [
 		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
+		path: '/blog',
+		changefreq: 'weekly',
+		priority: 0.8,
+		title: 'Blog — Bhavya Panchal | Frontend Developer Articles & Insights',
+		lastmod: new Date().toISOString().split('T')[0]
+	},
+	{
 		path: '/contact',
 		changefreq: 'monthly',
 		priority: 0.8,
@@ -116,7 +123,7 @@ export const navigationSections = [
 	{ name: 'Home', url: '/' },
 	{ name: 'About', url: '/about-me' },
 	{ name: 'Projects', url: '/projects' },
-	{ name: 'Journey', url: '/journey' },
+	{ name: 'Blog', url: '/blog' },
 	{ name: 'Contact', url: '/contact' }
 ] as const;
 

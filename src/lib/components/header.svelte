@@ -6,6 +6,7 @@
 		{ label: 'Home', href: '/' },
 		{ label: 'About', href: '/about-me' },
 		{ label: 'Projects', href: '/projects' },
+		{ label: 'Blog', href: '/blog' },
 		{ label: 'Contact', href: '/contact' }
 	];
 
@@ -116,7 +117,7 @@
 				menuRef,
 				{
 					width: 380,
-					height: 390,
+					height: 460,
 					duration: 0.8,
 					ease: 'expo.inOut'
 				},

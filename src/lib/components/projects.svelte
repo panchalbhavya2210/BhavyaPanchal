@@ -4,6 +4,7 @@
 	import Typography from './ui/typography.svelte';
 	import { ArrowUpRight } from '@lucide/svelte';
 	import { featuredProject, projects } from '$lib/data/projects';
+	import { revealCard } from '$lib/actions/revealCard';
 </script>
 
 <Section size="sm">
@@ -26,7 +27,13 @@
 				</div>
 
 				<!-- Featured Project -->
-				<a href={featuredProject.href} class="group relative w-full overflow-hidden min-h-100">
+				<a
+					href={featuredProject.href}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group relative w-full overflow-hidden min-h-100"
+					use:revealCard={0}
+				>
 					<img
 						src={featuredProject.image}
 						alt={featuredProject.title}
@@ -43,26 +50,26 @@
 								{featuredProject.title}
 							</Typography>
 
-					<div class="space-y-2">
-						<div class="flex flex-wrap gap-2 text-xs uppercase tracking-wider text-white">
-							{#each featuredProject.stack as tech, i (i)}
-								<span>{tech}</span>
-								{#if i < featuredProject.stack.length - 1}
-									<span class="text-primary">•</span>
-								{/if}
-							{/each}
-						</div>
+							<div class="space-y-2">
+								<div class="flex flex-wrap gap-2 text-xs uppercase tracking-wider text-white">
+									{#each featuredProject.stack as tech, i (i)}
+										<span>{tech}</span>
+										{#if i < featuredProject.stack.length - 1}
+											<span class="text-primary">•</span>
+										{/if}
+									{/each}
+								</div>
 
-						<Typography variant="bodySm" class="uppercase text-white/70">
-							{featuredProject.category}
-						</Typography>
+								<Typography variant="bodySm" class="uppercase text-white/70">
+									{featuredProject.category}
+								</Typography>
 
-						<div class="flex flex-wrap gap-x-4 gap-y-1">
-							{#each featuredProject.outcomes as outcome (outcome)}
-								<span class="text-xs text-primary/80">{outcome}</span>
-							{/each}
-						</div>
-					</div>
+								<div class="flex flex-wrap gap-x-4 gap-y-1">
+									{#each featuredProject.outcomes as outcome (outcome)}
+										<span class="text-xs text-primary/80">{outcome}</span>
+									{/each}
+								</div>
+							</div>
 						</div>
 
 						<div class="flex items-center justify-between">
@@ -79,114 +86,137 @@
 			<!-- Project Grid -->
 			<!-- Row 2 -->
 			<div class="grid gap-4 lg:grid-cols-3">
-				{#each projects.slice(0, 3) as project (project.id)}
-					<a href={project.href} class="group relative aspect-4/4 overflow-hidden bg-black">
-						<img
-							src={project.image}
-							alt={project.title}
-							class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-						/>
-
-						<div
-							class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"
-						></div>
-
-						<div class="relative z-10 flex h-full flex-col justify-end p-8">
-							<div class="space-y-4">
-								<Typography variant="h4" class="font-normal! uppercase text-white">
-									{project.title}
-								</Typography>
-
-								<div
-									class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white"
-								>
-									{#each project.stack as tech, i (i)}
-										<span>{tech}</span>
-
-										{#if i < project.stack.length - 1}
-											<span class="text-primary">•</span>
-										{/if}
-									{/each}
+				{#each projects.slice(0, 3) as project, i (project.id)}
+					{#if project.href !== ''}
+						<a
+							href={project.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group relative aspect-4/4 overflow-hidden bg-black"
+							use:revealCard={i + 1}
+						>
+							<img
+								src={project.image}
+								alt={project.title}
+								class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+							/>
+							<div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
+							<div class="relative z-10 flex h-full flex-col justify-end p-8">
+								<div class="space-y-4">
+									<Typography variant="h4" class="font-normal! uppercase text-white">{project.title}</Typography>
+									<div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white">
+										{#each project.stack as tech, j (j)}
+											<span>{tech}</span>
+											{#if j < project.stack.length - 1}<span class="text-primary">•</span>{/if}
+										{/each}
+									</div>
+									<Typography variant="bodySm" class="uppercase text-white/60">{project.category}</Typography>
+									<div class="flex flex-wrap gap-x-3 gap-y-0.5">
+										{#each project.outcomes as outcome (outcome)}
+											<span class="text-[10px] text-primary/70">{outcome}</span>
+										{/each}
+									</div>
 								</div>
-
-								<Typography variant="bodySm" class="uppercase text-white/60">
-									{project.category}
-								</Typography>
-
-								<div class="flex flex-wrap gap-x-3 gap-y-0.5">
-									{#each project.outcomes as outcome (outcome)}
-										<span class="text-[10px] text-primary/70">{outcome}</span>
-									{/each}
+								<div class="flex justify-end">
+									<ArrowUpRight class="size-5 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
 								</div>
 							</div>
-
-							{#if project.href !== ''}
-								<div class="flex justify-end">
-									<ArrowUpRight
-										class="size-5 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-									/>
+						</a>
+					{:else}
+						<div class="group relative aspect-4/4 overflow-hidden bg-black" use:revealCard={i + 1}>
+							<img
+								src={project.image}
+								alt={project.title}
+								class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+							/>
+							<div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
+							<div class="relative z-10 flex h-full flex-col justify-end p-8">
+								<div class="space-y-4">
+									<Typography variant="h4" class="font-normal! uppercase text-white">{project.title}</Typography>
+									<div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white">
+										{#each project.stack as tech, j (j)}
+											<span>{tech}</span>
+											{#if j < project.stack.length - 1}<span class="text-primary">•</span>{/if}
+										{/each}
+									</div>
+									<Typography variant="bodySm" class="uppercase text-white/60">{project.category}</Typography>
+									<div class="flex flex-wrap gap-x-3 gap-y-0.5">
+										{#each project.outcomes as outcome (outcome)}
+											<span class="text-[10px] text-primary/70">{outcome}</span>
+										{/each}
+									</div>
 								</div>
-							{/if}
+							</div>
 						</div>
-					</a>
+					{/if}
 				{/each}
 			</div>
 
 			<!-- Row 3 -->
 			<div class="grid gap-4 lg:grid-cols-2">
-				{#each projects.slice(3) as project (project.id)}
-					<a
-						href={project.href}
-						class="group relative aspect-square lg:aspect-21/9 overflow-hidden bg-black"
-					>
-						<img
-							src={project.image}
-							alt={project.title}
-							class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-						/>
-
-						<div
-							class="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-transparent"
-						></div>
-
-						<div class="relative z-10 flex h-full flex-col justify-end p-8">
-							<div class="space-y-4">
-								<Typography variant="h4" class="font-normal! uppercase text-white">
-									{project.title}
-								</Typography>
-
-								<div
-									class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white"
-								>
-									{#each project.stack as tech, i (i)}
-										<span>{tech}</span>
-
-										{#if i < project.stack.length - 1}
-											<span class="text-primary">•</span>
-										{/if}
-									{/each}
+				{#each projects.slice(3) as project, i (project.id)}
+					{#if project.href !== ''}
+						<a
+							href={project.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group relative aspect-square lg:aspect-21/9 overflow-hidden bg-black"
+							use:revealCard={i + 4}
+						>
+							<img
+								src={project.image}
+								alt={project.title}
+								class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+							/>
+							<div class="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-transparent"></div>
+							<div class="relative z-10 flex h-full flex-col justify-end p-8">
+								<div class="space-y-4">
+									<Typography variant="h4" class="font-normal! uppercase text-white">{project.title}</Typography>
+									<div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white">
+										{#each project.stack as tech, j (j)}
+											<span>{tech}</span>
+											{#if j < project.stack.length - 1}<span class="text-primary">•</span>{/if}
+										{/each}
+									</div>
+									<Typography variant="bodySm" class="uppercase text-white/60">{project.category}</Typography>
+									<div class="flex flex-wrap gap-x-3 gap-y-0.5">
+										{#each project.outcomes as outcome (outcome)}
+											<span class="text-[10px] text-primary/70">{outcome}</span>
+										{/each}
+									</div>
 								</div>
-
-								<Typography variant="bodySm" class="uppercase text-white/60">
-									{project.category}
-								</Typography>
-
-								<div class="flex flex-wrap gap-x-3 gap-y-0.5">
-									{#each project.outcomes as outcome (outcome)}
-										<span class="text-[10px] text-primary/70">{outcome}</span>
-									{/each}
+								<div class="flex justify-end">
+									<ArrowUpRight class="size-5 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
 								</div>
 							</div>
-
-							{#if project.href !== ''}
-								<div class="flex justify-end">
-									<ArrowUpRight
-										class="size-5 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-									/>
+						</a>
+					{:else}
+						<div class="group relative aspect-square lg:aspect-21/9 overflow-hidden bg-black" use:revealCard={i + 4}>
+							<img
+								src={project.image}
+								alt={project.title}
+								class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+							/>
+							<div class="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-transparent"></div>
+							<div class="relative z-10 flex h-full flex-col justify-end p-8">
+								<div class="space-y-4">
+									<Typography variant="h4" class="font-normal! uppercase text-white">{project.title}</Typography>
+									<div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white">
+										{#each project.stack as tech, j (j)}
+											<span>{tech}</span>
+											{#if j < project.stack.length - 1}<span class="text-primary">•</span>{/if}
+										{/each}
+									</div>
+									<Typography variant="bodySm" class="uppercase text-white/60">{project.category}</Typography>
+									<div class="flex flex-wrap gap-x-3 gap-y-0.5">
+										{#each project.outcomes as outcome (outcome)}
+											<span class="text-[10px] text-primary/70">{outcome}</span>
+										{/each}
+									</div>
 								</div>
-							{/if}
+							</div>
 						</div>
-					</a>
+					{/if}
 				{/each}
 			</div>
 		</div>

@@ -31,7 +31,7 @@
 					href={featuredProject.href}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="group relative w-full overflow-hidden min-h-100"
+					class="group relative w-full overflow-hidden min-h-96 lg:min-h-[25rem]"
 					use:revealCard={0}
 				>
 					<img
@@ -40,10 +40,10 @@
 						class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 					/>
 
-					<div class="absolute inset-0 bg-linear-to-r from-black/10 via-black/20 to-black/70"></div>
+					<div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent lg:bg-linear-to-r lg:from-black/10 lg:via-black/20 lg:to-black/70"></div>
 
 					<div
-						class="relative z-10 ml-auto flex h-full lg:max-w-[49%] flex-col justify-between bg-black/55 p-8 backdrop-blur-md"
+						class="relative z-10 flex h-full flex-col justify-end p-6 lg:ml-auto lg:max-w-[49%] lg:justify-between lg:bg-black/55 lg:p-8 lg:backdrop-blur-md"
 					>
 						<div class="space-y-6">
 							<Typography variant="h3" class="font-normal! uppercase text-white">
@@ -85,14 +85,14 @@
 
 			<!-- Project Grid -->
 			<!-- Row 2 -->
-			<div class="grid gap-4 lg:grid-cols-3">
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 				{#each projects.slice(0, 3) as project, i (project.id)}
 					{#if project.href !== ''}
 						<a
 							href={project.href}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="group relative aspect-4/4 overflow-hidden bg-black"
+							class="group relative aspect-square overflow-hidden bg-black"
 							use:revealCard={i + 1}
 						>
 							<img
@@ -101,7 +101,7 @@
 								class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 							/>
 							<div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
-							<div class="relative z-10 flex h-full flex-col justify-end p-8">
+							<div class="relative z-10 flex h-full flex-col justify-end p-6 lg:p-8">
 								<div class="space-y-4">
 									<Typography variant="h4" class="font-normal! uppercase text-white">{project.title}</Typography>
 									<div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white">
@@ -123,14 +123,14 @@
 							</div>
 						</a>
 					{:else}
-						<div class="group relative aspect-4/4 overflow-hidden bg-black" use:revealCard={i + 1}>
+						<div class="group relative aspect-square overflow-hidden bg-black" use:revealCard={i + 1}>
 							<img
 								src={project.image}
 								alt={project.title}
 								class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 							/>
 							<div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
-							<div class="relative z-10 flex h-full flex-col justify-end p-8">
+							<div class="relative z-10 flex h-full flex-col justify-end p-6 lg:p-8">
 								<div class="space-y-4">
 									<Typography variant="h4" class="font-normal! uppercase text-white">{project.title}</Typography>
 									<div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white">
@@ -153,14 +153,14 @@
 			</div>
 
 			<!-- Row 3 -->
-			<div class="grid gap-4 lg:grid-cols-2">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 				{#each projects.slice(3) as project, i (project.id)}
 					{#if project.href !== ''}
 						<a
 							href={project.href}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="group relative aspect-square lg:aspect-21/9 overflow-hidden bg-black"
+							class="group relative aspect-[4/3] lg:aspect-[21/9] overflow-hidden bg-black"
 							use:revealCard={i + 4}
 						>
 							<img
@@ -168,8 +168,8 @@
 								alt={project.title}
 								class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 							/>
-							<div class="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-transparent"></div>
-							<div class="relative z-10 flex h-full flex-col justify-end p-8">
+							<div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent lg:bg-linear-to-r lg:from-black/80 lg:via-black/40 lg:to-transparent"></div>
+							<div class="relative z-10 flex h-full flex-col justify-end p-6 lg:p-8">
 								<div class="space-y-4">
 									<Typography variant="h4" class="font-normal! uppercase text-white">{project.title}</Typography>
 									<div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white">
@@ -191,14 +191,14 @@
 							</div>
 						</a>
 					{:else}
-						<div class="group relative aspect-square lg:aspect-21/9 overflow-hidden bg-black" use:revealCard={i + 4}>
+						<div class="group relative aspect-[4/3] lg:aspect-[21/9] overflow-hidden bg-black" use:revealCard={i + 4}>
 							<img
 								src={project.image}
 								alt={project.title}
 								class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 							/>
-							<div class="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-transparent"></div>
-							<div class="relative z-10 flex h-full flex-col justify-end p-8">
+							<div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent lg:bg-linear-to-r lg:from-black/80 lg:via-black/40 lg:to-transparent"></div>
+							<div class="relative z-10 flex h-full flex-col justify-end p-6 lg:p-8">
 								<div class="space-y-4">
 									<Typography variant="h4" class="font-normal! uppercase text-white">{project.title}</Typography>
 									<div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white">

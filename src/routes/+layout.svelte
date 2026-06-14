@@ -50,6 +50,11 @@
 	onMount(async () => {
 		lenis = new Lenis({ autoRaf: true });
 		gsapMod = (await import('gsap')).default;
+		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+		gsapMod.registerPlugin(ScrollTrigger);
+		lenis.on('scroll', ScrollTrigger.update);
+		gsapMod.ticker.add((time) => lenis!.raf(time * 1000));
+		gsapMod.ticker.lagSmoothing(0);
 	});
 
 	const schemas = allSchemas();

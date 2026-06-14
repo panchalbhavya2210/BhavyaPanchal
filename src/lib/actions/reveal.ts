@@ -5,6 +5,7 @@ export function reveal(node: HTMLElement, delay = 0) {
 
 	let killed = false;
 	let cleanup: (() => void) | null = null;
+	let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
 	(async () => {
 		const [gsapMod, stMod] = await Promise.all([
@@ -19,27 +20,32 @@ export function reveal(node: HTMLElement, delay = 0) {
 
 		gsap.set(node, { y: 28, opacity: 0 });
 
-		const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: node,
-				start: 'top 94%',
-				once: true
+		fallbackTimer = setTimeout(() => {
+			if (killed) return;
+			node.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+			node.style.opacity = '1';
+			node.style.transform = 'none';
+		}, 4000);
+
+		const st = ScrollTrigger.create({
+			trigger: node,
+			start: 'top 94%',
+			once: true,
+			onEnter: () => {
+				if (fallbackTimer) clearTimeout(fallbackTimer);
+				gsap.to(node, {
+					y: 0,
+					opacity: 1,
+					duration: 0.65,
+					delay,
+					ease: 'power3.out'
+				});
 			}
 		});
 
-		tl.to(node, {
-			y: 0,
-			opacity: 1,
-			duration: 0.65,
-			delay,
-			ease: 'power3.out'
-		});
-
 		cleanup = () => {
-			tl.kill();
-			ScrollTrigger.getAll().forEach((st) => {
-				if (st.vars.trigger === node) st.kill();
-			});
+			if (fallbackTimer) clearTimeout(fallbackTimer);
+			st.kill();
 		};
 	})();
 

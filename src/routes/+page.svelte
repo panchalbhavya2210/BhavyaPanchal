@@ -12,6 +12,7 @@
 	import { featuredProject, projects } from '$lib/data/projects';
 	import { reveal } from '$lib/actions/reveal';
 	import { revealCard } from '$lib/actions/revealCard';
+	// import BeyondCode from '$lib/components/beyond-code.svelte';
 
 	const meta = {
 		title: `${site.name} — Frontend Developer &amp; UI Engineer | Ahmedabad, India`,
@@ -233,3 +234,5 @@
 		</div>
 	</Container>
 </Section>
+
+<!-- <BeyondCode /> -->

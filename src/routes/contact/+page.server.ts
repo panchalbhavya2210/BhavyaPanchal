@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import { fail } from '@sveltejs/kit';
 import { config } from 'dotenv';
 import { resolve } from 'node:path';

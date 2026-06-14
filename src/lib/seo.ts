@@ -29,7 +29,7 @@ export const site = {
 	],
 	author: 'Bhavya Panchal',
 	locale: 'en_IN',
-	twitter: '@bhavyapanchal',
+	twitter: '@panchalbhavya22',
 	image: '/og-image.webp',
 	foundingDate: '2022',
 	email: 'panchalbhavya2210@gmail.com'
@@ -72,35 +72,35 @@ export const sitemapEntries: SitemapEntry[] = [
 		changefreq: 'weekly',
 		priority: 1.0,
 		title: 'Bhavya Panchal — Frontend Developer & UI Engineer Portfolio',
-		lastmod: '2026-06-14'
+		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
 		path: '/about-me',
 		changefreq: 'monthly',
 		priority: 0.8,
 		title: 'About Bhavya Panchal — Frontend Developer & UI Engineer',
-		lastmod: '2026-06-14'
+		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
 		path: '/projects',
 		changefreq: 'weekly',
 		priority: 0.9,
 		title: 'Projects — Bhavya Panchal | Frontend Developer Portfolio',
-		lastmod: '2026-06-14'
+		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
 		path: '/journey',
 		changefreq: 'monthly',
 		priority: 0.7,
 		title: 'Career Journey — Bhavya Panchal | Frontend Developer',
-		lastmod: '2026-06-14'
+		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
 		path: '/contact',
 		changefreq: 'monthly',
 		priority: 0.8,
 		title: 'Contact Bhavya Panchal — Frontend Developer & UI Engineer',
-		lastmod: '2026-06-14'
+		lastmod: new Date().toISOString().split('T')[0]
 	}
 ];
 
@@ -184,9 +184,9 @@ export function personSchema() {
 			name: 'Gujarat Technological University'
 		},
 		sameAs: [
-			'https://github.com/bhavyapanchal',
+			'https://github.com/panchalbhavya2210',
 			'https://linkedin.com/in/bhavyapanchal',
-			'https://twitter.com/bhavyapanchal'
+			'https://x.com/panchalbhavya22'
 		]
 	};
 }
@@ -248,9 +248,9 @@ export function organizationSchema() {
 			addressCountry: 'IN'
 		},
 		sameAs: [
-			'https://github.com/bhavyapanchal',
+			'https://github.com/panchalbhavya2210',
 			'https://linkedin.com/in/bhavyapanchal',
-			'https://twitter.com/bhavyapanchal'
+			'https://x.com/panchalbhavya22'
 		]
 	};
 }

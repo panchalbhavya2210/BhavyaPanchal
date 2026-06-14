@@ -213,7 +213,7 @@
 					<div class="space-y-8">
 						<div class="aspect-4/5 w-full overflow-hidden bg-neutral-800">
 							<div class="flex h-full items-center justify-center">
-								<img src={FooterImg} alt="footer" loading="lazy" />
+								<img src={FooterImg} alt="Bhavya Panchal" loading="lazy" />
 							</div>
 						</div>
 

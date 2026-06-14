@@ -22,6 +22,7 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={canonical} />
 	<meta property="og:image" content={image} />
+	<meta property="og:image:alt" content="{meta.title} — {site.name}" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 	<meta property="og:image:type" content="image/webp" />
@@ -34,7 +35,7 @@
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:url" content={canonical} />
 	<meta name="twitter:image" content={image} />
-	<meta name="twitter:image:alt" content={meta.title} />
+	<meta name="twitter:image:alt" content="{meta.title} — {site.name}" />
 	<meta name="twitter:creator" content={site.twitter} />
 	<meta name="twitter:site" content={site.twitter} />
 

@@ -16,13 +16,13 @@
 					<Typography variant="lead" class="mb-4 text-black!" animate
 						>I AM <span class="text-primary">BHAVYA</span> PANCHAL.</Typography
 					>
-					<Typography variant="h1" animate class="font-normal" aria-hidden="true">
+					<Typography variant="h1" animate class="font-normal" as="div" aria-hidden="true">
 						DES<span class="text-primary">I</span>GN
 					</Typography>
-					<Typography variant="h1" animate class="text-primary font-normal" aria-hidden="true"
+					<Typography variant="h1" animate class="text-primary font-normal" as="div" aria-hidden="true"
 						>CODE <span class="text-black">&</span></Typography
 					>
-					<Typography variant="h1" animate class="font-normal" aria-hidden="true">CRAFT</Typography>
+					<Typography variant="h1" animate class="font-normal" as="div" aria-hidden="true">CRAFT</Typography>
 
 					<Typography variant="lead" class="mt-4 text-black!" animate
 						>CRAFTING MEANINGFUL EXPERIENCES WITH PRECISION.</Typography
@@ -36,6 +36,8 @@
 			<div class="h-full">
 				<img
 					src={Bhavya}
+					width="720"
+					height="960"
 					alt="Bhavya Panchal Web Developer"
 					class="w-full h-full object-cover object-center"
 				/>

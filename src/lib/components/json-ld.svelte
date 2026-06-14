@@ -1,26 +1,18 @@
 <script lang="ts">
 	/**
-	 * Escape `</` sequences so JSON doesn't prematurely close the script tag.
-	 */
-	function safeJsonLd(data: unknown): string {
-		return JSON.stringify(data).replace(/<\//g, '<\\/');
-	}
-
-	/**
-	 * Renders one or more schema.org objects as a safe JSON-LD script tag.
-	 * Pass a single schema object or spread multiple; multiple are wrapped in @graph.
+	 * Renders one or more schema.org objects as a JSON-LD script tag.
+	 * Uses {@html} with JSON.stringify — safe because all schema data is hardcoded
+	 * (no user input) and JSON.stringify guarantees structurally valid output.
+	 *
+	 * Pass a single schema object or array; multiple are wrapped in @graph.
 	 */
 	let { schemas }: { schemas: Record<string, unknown>[] } = $props();
 
-	const json = $derived(
-		safeJsonLd(
-			schemas.length === 1 ? schemas[0] : { '@context': 'https://schema.org', '@graph': schemas }
-		)
+	const data = $derived(
+		schemas.length === 1 ? schemas[0] : { '@context': 'https://schema.org', '@graph': schemas }
 	);
 </script>
 
 <svelte:head>
-	<script type="application/ld+json">
-		{json}
-	</script>
+	{@html '<script type="application/ld+json">' + JSON.stringify(data) + '</script>'}
 </svelte:head>

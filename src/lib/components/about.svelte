@@ -34,14 +34,14 @@
 						ABOUT <span class="text-primary">ME.</span>
 					</Typography>
 
-					<Typography variant="lead" color="muted" class="max-w-3xl">
+					<Typography variant="lead" color="muted" class="max-w-3xl" animate>
 						I'm Bhavya Panchal, a frontend developer focused on building fast, scalable and
 						thoughtfully crafted digital experiences. I combine design thinking with modern
 						development practices to create products that feel intuitive, perform exceptionally and
 						solve real business problems.
 					</Typography>
 
-					<Typography variant="bodyLg" color="muted" class="max-w-2xl">
+					<Typography variant="bodyLg" color="muted" class="max-w-2xl" animate>
 						Over the years I've worked across corporate websites, e-commerce platforms, analytics
 						dashboards and custom web applications — translating complex requirements into clean,
 						maintainable interfaces.

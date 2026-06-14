@@ -28,8 +28,9 @@
 						>CRAFTING MEANINGFUL EXPERIENCES WITH PRECISION.</Typography
 					>
 				</div>
-				<div class="mt-8">
-					<ButtonPrimary icon={Arrow}>VIEW PROJECTS</ButtonPrimary>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<ButtonPrimary href="/projects" icon={Arrow}>VIEW PROJECTS</ButtonPrimary>
+					<ButtonPrimary href="/contact" variant="secondary" icon={Arrow}>GET IN TOUCH</ButtonPrimary>
 				</div>
 			</div>
 			<div class="h-full">

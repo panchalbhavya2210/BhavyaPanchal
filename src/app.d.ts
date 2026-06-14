@@ -10,4 +10,14 @@ declare global {
 	}
 }
 
+interface ImportMetaEnv {
+	readonly GMAIL_USER: string;
+	readonly GMAIL_APP_PASSWORD: string;
+	readonly OWNER_EMAIL?: string;
+}
+
+interface ImportMeta {
+	readonly env: ImportMetaEnv;
+}
+
 export {};

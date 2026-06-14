@@ -3,10 +3,10 @@
 	import type gsap from 'gsap';
 
 	const links = [
-		{ label: 'About', href: '#about' },
-		{ label: 'Projects', href: '#projects' },
-		{ label: 'Journey', href: '#journey' },
-		{ label: 'Contact', href: '#contact' }
+		{ label: 'Home', href: '/' },
+		{ label: 'About', href: '/about-me' },
+		{ label: 'Projects', href: '/projects' },
+		{ label: 'Contact', href: '/contact' }
 	];
 
 	let open = $state(false);
@@ -23,6 +23,7 @@
 	function directionalHover(node: HTMLAnchorElement) {
 		const overlay = node.querySelector<HTMLDivElement>('.link-overlay')!;
 		let rafId: number | null = null;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		let hovering = false;
 
 		function getDirection(e: MouseEvent) {
@@ -100,85 +101,87 @@
 		}
 	}
 
-	onMount(async () => {
+	onMount(() => {
 		document.addEventListener('click', handleOutsideClick);
 
-		const gsapModule = await import('gsap');
-		const gsap = gsapModule.default;
+		(async () => {
+			const gsapModule = await import('gsap');
+			const gsap = gsapModule.default;
 
-		tl = gsap.timeline({
-			paused: true
-		});
+			tl = gsap.timeline({
+				paused: true
+			});
 
-		tl.to(
-			menuRef,
-			{
-				width: 380,
-				height: 390,
-				duration: 0.8,
-				ease: 'expo.inOut'
-			},
-			0
-		)
-
-			.to(
-				topLine,
+			tl.to(
+				menuRef,
 				{
-					top: '50%',
-					yPercent: -50,
-					rotate: 45,
-					duration: 0.4,
-					ease: 'power3.out'
-				},
-				0
-			)
-
-			.to(
-				middleLine,
-				{
-					opacity: 0,
-					duration: 0.2
-				},
-				0
-			)
-
-			.to(
-				bottomLine,
-				{
-					top: '50%',
-					yPercent: -50,
-					rotate: -45,
-					duration: 0.4,
-					ease: 'power3.out'
-				},
-				0
-			)
-
-			.to(
-				dividerRef!,
-				{
-					scaleX: 1,
-					duration: 0.5,
-					ease: 'power3.out'
-				},
-				0.2
-			)
-
-			.fromTo(
-				'.menu-item',
-				{
-					y: 40,
-					opacity: 0
-				},
-				{
-					y: 0,
-					opacity: 1,
-					stagger: 0.07,
+					width: 380,
+					height: 390,
 					duration: 0.8,
-					ease: 'power4.out'
+					ease: 'expo.inOut'
 				},
-				0.15
-			);
+				0
+			)
+
+				.to(
+					topLine,
+					{
+						top: '50%',
+						yPercent: -50,
+						rotate: 45,
+						duration: 0.4,
+						ease: 'power3.out'
+					},
+					0
+				)
+
+				.to(
+					middleLine,
+					{
+						opacity: 0,
+						duration: 0.2
+					},
+					0
+				)
+
+				.to(
+					bottomLine,
+					{
+						top: '50%',
+						yPercent: -50,
+						rotate: -45,
+						duration: 0.4,
+						ease: 'power3.out'
+					},
+					0
+				)
+
+				.to(
+					dividerRef!,
+					{
+						scaleX: 1,
+						duration: 0.5,
+						ease: 'power3.out'
+					},
+					0.2
+				)
+
+				.fromTo(
+					'.menu-item',
+					{
+						y: 40,
+						opacity: 0
+					},
+					{
+						y: 0,
+						opacity: 1,
+						stagger: 0.07,
+						duration: 0.8,
+						ease: 'power4.out'
+					},
+					0.15
+				);
+		})();
 
 		return () => {
 			document.removeEventListener('click', handleOutsideClick);
@@ -237,6 +240,7 @@
 							title="Navigate to {link.label}"
 							class="menu-item group relative flex h-18 items-center justify-end overflow-hidden px-6"
 							use:directionalHover
+							onclick={closeMenu}
 						>
 							<div
 								class="link-overlay absolute inset-0 bg-primary"

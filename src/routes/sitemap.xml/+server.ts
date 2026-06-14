@@ -1,4 +1,4 @@
-import { site, sitemapEntries, absoluteUrl } from '$lib/seo';
+import { sitemapEntries, absoluteUrl } from '$lib/seo';
 
 const pages = [...sitemapEntries];
 
@@ -10,15 +10,15 @@ export async function GET() {
 	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 ${pages
-	.map(
-		(page) => `	<url>
+			.map(
+				(page) => `	<url>
 		<loc>${absoluteUrl(page.path)}</loc>
 		${page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : ''}
 		${page.changefreq ? `<changefreq>${page.changefreq}</changefreq>` : ''}
 		${page.priority !== undefined ? `<priority>${page.priority}</priority>` : ''}
 	</url>`
-	)
-	.join('\n')}
+			)
+			.join('\n')}
 </urlset>`;
 
 	return new Response(sitemap, {

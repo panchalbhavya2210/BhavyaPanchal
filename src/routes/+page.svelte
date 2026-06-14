@@ -1,31 +1,68 @@
-<script>
-	import About from '$lib/components/about.svelte';
+<script lang="ts">
 	import Banner from '$lib/components/banner.svelte';
-	import Exp from '$lib/components/exp.svelte';
-	import Projects from '$lib/components/projects.svelte';
+	import Container from '$lib/components/ui/container.svelte';
+	import Section from '$lib/components/ui/section.svelte';
+	import Typography from '$lib/components/ui/typography.svelte';
+	import ButtonPrimary from '$lib/components/ui/button-primary.svelte';
+	import Arrow from '@lucide/svelte/icons/arrow-up-right';
+	import SeoMeta from '$lib/components/seo-meta.svelte';
+	import JsonLd from '$lib/components/json-ld.svelte';
+	import { site, webSiteSchema } from '$lib/seo';
+
+	const meta = {
+		title: `${site.name} — Frontend Developer &amp; UI Engineer`,
+		description:
+			'Bhavya Panchal is a frontend developer and UI engineer from Ahmedabad, India. Crafting fast, accessible, and scalable digital experiences with modern web technologies.',
+		keywords:
+			'Bhavya Panchal, frontend developer, UI engineer, web developer, portfolio, SvelteKit, TypeScript, GSAP, Ahmedabad',
+		path: '/',
+		image: site.image,
+		type: 'website'
+	} as const;
 </script>
 
-<svelte:head>
-	<script type="application/ld+json">
-		{JSON.stringify(allProjects.map((project, index) => ({
-			'@context': 'https://schema.org',
-			'@type': 'CreativeWork',
-			name: project.title,
-			description: project.description,
-			image: absoluteUrl(project.image),
-			url: project.href || undefined,
-			position: index + 1,
-			about: project.category,
-			keywords: project.stack.join(', '),
-			creator: {
-				'@type': 'Person',
-				name: 'Bhavya Panchal'
-			}
-		})))}
-	</script>
-</svelte:head>
+<SeoMeta {meta} />
+<JsonLd schemas={[webSiteSchema()]} />
 
-<div id="work"><Banner /></div>
-<div id="projects"><Projects /></div>
-<div id="about"><About /></div>
-<div id="journery"><Exp /></div>
+<Banner />
+
+<Section size="md" class="bg-white">
+	<Container size="full">
+		<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+			<div class="space-y-6">
+				<Typography variant="h2" class="font-normal" animate>
+					I BUILD FOR <span class="text-primary">THE WEB.</span>
+				</Typography>
+				<Typography variant="lead" color="muted" class="max-w-xl">
+					Clean UI, performance, accessibility and scalable frontend architecture — that's my craft.
+				</Typography>
+				<div class="flex flex-wrap gap-4 pt-4">
+					<ButtonPrimary href="/projects" icon={Arrow}>VIEW PROJECTS</ButtonPrimary>
+					<ButtonPrimary href="/about-me" variant="secondary" icon={Arrow}>ABOUT ME</ButtonPrimary>
+				</div>
+			</div>
+			<div class="grid grid-cols-2 gap-4">
+				<div class="space-y-4">
+					<div class="border border-border/50 p-6 text-center">
+						<Typography variant="h3" class="text-primary font-bold">3+</Typography>
+						<Typography variant="bodySm" color="muted">Years Experience</Typography>
+					</div>
+					<div class="border border-border/50 p-6 text-center">
+						<Typography variant="h3" class="text-primary font-bold">15+</Typography>
+						<Typography variant="bodySm" color="muted">Projects Delivered</Typography>
+					</div>
+				</div>
+				<div class="space-y-4 pt-6">
+					<div class="border border-border/50 p-6 text-center">
+						<Typography variant="h3" class="text-primary font-bold">8+</Typography>
+						<Typography variant="bodySm" color="muted">Technologies</Typography>
+					</div>
+					<div class="border border-border/50 p-6 text-center">
+						<Typography variant="h3" class="text-primary font-bold">100%</Typography>
+						<Typography variant="bodySm" color="muted">Client Satisfaction</Typography>
+					</div>
+				</div>
+			</div>
+		</div>
+	</Container>
+</Section>

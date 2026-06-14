@@ -1,8 +1,8 @@
 import { dev } from '$app/environment';
 
 export const site = {
-	name: 'Bhavya Panchal — Frontend Developer',
-	tagline: 'Design, Code & Craft',
+	name: 'Bhavya Panchal',
+	tagline: 'Frontend Developer & UI Engineer',
 	url: dev ? 'http://localhost:5173' : 'https://bhavyapanchal.in',
 	titleSeparator: ' — ',
 	description:
@@ -32,15 +32,30 @@ export const site = {
 	twitter: '@bhavyapanchal',
 	image: '/og-image.webp',
 	foundingDate: '2022',
-	email: 'hello@bhavyapanchal.com'
+	email: 'panchalbhavya2210@gmail.com'
 } as const;
 
 export function pageTitle(title: string) {
 	return `${title}${site.titleSeparator}${site.name}`;
 }
 
+export function ogTitle(title: string) {
+	return `${title}${site.titleSeparator}${site.name} — ${site.tagline}`;
+}
+
 export function absoluteUrl(path: string) {
 	return `${site.url}${path}`;
+}
+
+export interface PageMeta {
+	title: string;
+	description: string;
+	keywords?: string;
+	path?: string;
+	image?: string;
+	type?: 'website' | 'article' | 'profile';
+	publishedTime?: string;
+	modifiedTime?: string;
 }
 
 export type SitemapEntry = {
@@ -56,44 +71,45 @@ export const sitemapEntries: SitemapEntry[] = [
 		path: '/',
 		changefreq: 'weekly',
 		priority: 1.0,
-		title: 'Bhavya Panchal — Frontend Developer Portfolio',
-		lastmod: '2026-06-13'
+		title: 'Bhavya Panchal — Frontend Developer & UI Engineer Portfolio',
+		lastmod: '2026-06-14'
 	},
 	{
-		path: '/#about',
+		path: '/about-me',
 		changefreq: 'monthly',
 		priority: 0.8,
-		title: 'About — Bhavya Panchal',
-		lastmod: '2026-06-13'
+		title: 'About Bhavya Panchal — Frontend Developer & UI Engineer',
+		lastmod: '2026-06-14'
 	},
 	{
-		path: '/#projects',
-		changefreq: 'monthly',
+		path: '/projects',
+		changefreq: 'weekly',
 		priority: 0.9,
-		title: 'Projects — Bhavya Panchal',
-		lastmod: '2026-06-13'
+		title: 'Projects — Bhavya Panchal | Frontend Developer Portfolio',
+		lastmod: '2026-06-14'
 	},
 	{
-		path: '/#stack',
+		path: '/journey',
 		changefreq: 'monthly',
 		priority: 0.7,
-		title: 'Tech Stack — Bhavya Panchal',
-		lastmod: '2026-06-13'
+		title: 'Career Journey — Bhavya Panchal | Frontend Developer',
+		lastmod: '2026-06-14'
 	},
 	{
-		path: '/#contact',
+		path: '/contact',
 		changefreq: 'monthly',
 		priority: 0.8,
-		title: 'Contact — Bhavya Panchal',
-		lastmod: '2026-06-13'
+		title: 'Contact Bhavya Panchal — Frontend Developer & UI Engineer',
+		lastmod: '2026-06-14'
 	}
 ];
 
 export const navigationSections = [
-	{ name: 'About', url: '/#about' },
-	{ name: 'Projects', url: '/#projects' },
-	{ name: 'Stack', url: '/#stack' },
-	{ name: 'Contact', url: '/#contact' }
+	{ name: 'Home', url: '/' },
+	{ name: 'About', url: '/about-me' },
+	{ name: 'Projects', url: '/projects' },
+	{ name: 'Journey', url: '/journey' },
+	{ name: 'Contact', url: '/contact' }
 ] as const;
 
 export function webSiteSchema() {
@@ -191,19 +207,50 @@ export function siteNavigationSchema() {
 	};
 }
 
-export function breadcrumbSchema() {
+export function breadcrumbSchema(items?: { name: string; path: string }[]) {
+	const crumbs = [{ name: site.name, path: '/' }, ...(items ?? [])];
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'BreadcrumbList',
 		'@id': `${site.url}/#breadcrumb`,
-		numberOfItems: 1,
-		itemListElement: [
-			{
-				'@type': 'ListItem',
-				position: 1,
-				name: site.name,
-				item: site.url
-			}
+		numberOfItems: crumbs.length,
+		itemListElement: crumbs.map((crumb, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			name: crumb.name,
+			item: absoluteUrl(crumb.path)
+		}))
+	};
+}
+
+export function organizationSchema() {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		'@id': `${site.url}/#organization`,
+		name: site.name,
+		alternateName: 'Bhavya Panchal Portfolio',
+		description: site.description,
+		url: site.url,
+		logo: absoluteUrl(site.image),
+		image: absoluteUrl(site.image),
+		email: site.email,
+		foundingDate: site.foundingDate,
+		founder: {
+			'@type': 'Person',
+			'@id': `${site.url}/#person`,
+			name: site.author
+		},
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'Ahmedabad',
+			addressRegion: 'Gujarat',
+			addressCountry: 'IN'
+		},
+		sameAs: [
+			'https://github.com/bhavyapanchal',
+			'https://linkedin.com/in/bhavyapanchal',
+			'https://twitter.com/bhavyapanchal'
 		]
 	};
 }
@@ -239,6 +286,7 @@ export function portfolioSchema() {
 export function allSchemas() {
 	return [
 		webSiteSchema(),
+		organizationSchema(),
 		personSchema(),
 		siteNavigationSchema(),
 		breadcrumbSchema(),

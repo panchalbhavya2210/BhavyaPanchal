@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { beforeNavigate, afterNavigate, goto } from '$app/navigation';
+	import posthog from 'posthog-js';
 	import type gsap from 'gsap';
 	import Lenis from 'lenis';
 	import './layout.css';
@@ -112,6 +113,7 @@
 	});
 
 	afterNavigate(() => {
+		posthog.capture('$pageview');
 		window.scrollTo(0, 0);
 		lenis?.start();
 

@@ -329,7 +329,7 @@ export default function Error({ error, reset }) {
   revalidatePath('/dashboard');
 }</code></pre>
 
-<p>I use Server Actions extensively in my <a href="/projects/01">Electron Enterprise</a> project for contact forms and newsletter subscriptions. The progressive enhancement model means forms work even before JavaScript loads.</p>
+<p>I use Server Actions extensively in my <a href="/projects/electron-enterprise">Electron Enterprise</a> project for contact forms and newsletter subscriptions. The progressive enhancement model means forms work even before JavaScript loads.</p>
 
 <h2>Route Handlers for API Endpoints</h2>
 
@@ -373,7 +373,7 @@ export async function POST(request: Request) {
 
 <p>LCP measures when the largest content element (hero image, heading, or video poster) becomes visible. Google considers LCP under 2.5 seconds as "good."</p>
 
-<p>On the <a href="/projects/01">Electron Enterprise project</a>, I reduced LCP from 3.2s to 1.1s through four specific interventions:</p>
+<p>On the <a href="/projects/electron-enterprise">Electron Enterprise project</a>, I reduced LCP from 3.2s to 1.1s through four specific interventions:</p>
 
 <ol>
 <li><strong>Preloaded the hero image</strong> with <code>fetchpriority="high"</code> on the LCP element</li>
@@ -414,7 +414,7 @@ function handleFilterChange(value: string) {
 
 <h2>CLS: Cumulative Layout Shift</h2>
 
-<p>CLS measures visual stability. Pages should maintain a CLS of 0.1 or less. On the <a href="/projects/05">Content Platform project</a>, I achieved zero CLS through:</p>
+<p>CLS measures visual stability. Pages should maintain a CLS of 0.1 or less. On the <a href="/projects/allspeech">Content Platform project</a>, I achieved zero CLS through:</p>
 
 <ul>
 <li><strong>Explicit dimensions on all images and videos</strong> — width and height attributes on every media element</li>
@@ -521,7 +521,7 @@ function AddToCart({ variantId }) {
 
 <h2>Performance Optimisation</h2>
 
-<p>On a <a href="/projects/03">Health Commerce project</a>, I achieved sub-second page loads by:</p>
+<p>On a <a href="/projects/superfoodies">Health Commerce project</a>, I achieved sub-second page loads by:</p>
 
 <ul>
 <li>Using Hydrogen's built-in image optimisation with responsive srcsets</li>
@@ -630,7 +630,7 @@ export default function Newsletter() {
 
 <p>If JavaScript is available, Remix enhances the form with optimistic UI, pending states, and client-side validation — but the basic functionality works without any JavaScript.</p>
 
-<p>I used this pattern extensively in the <a href="/projects/01">Electron Enterprise project</a>. The contact form works for all users — from modern browsers to screen readers to curl — because it is built on standard HTML form submission.</p>
+<p>I used this pattern extensively in the <a href="/projects/electron-enterprise">Electron Enterprise project</a>. The contact form works for all users — from modern browsers to screen readers to curl — because it is built on standard HTML form submission.</p>
 
 <h2>Error Handling that Actually Works</h2>
 
@@ -1063,7 +1063,7 @@ export const actions = {
 
 <p>JavaScript applications present unique SEO challenges. Google can render JavaScript, but it is not instant — and poor JavaScript SEO practices can delay or prevent indexing. Here is my comprehensive guide based on real-world optimization work.</p>
 
-<p>As a <strong>frontend developer</strong> who has implemented technical SEO across React, Next.js, Remix, and SvelteKit applications, I have seen firsthand how proper implementation impacts organic traffic. On the <a href="/projects/05">Content Platform project</a>, technical SEO improvements contributed to a 45% increase in organic traffic.</p>
+<p>As a <strong>frontend developer</strong> who has implemented technical SEO across React, Next.js, Remix, and SvelteKit applications, I have seen firsthand how proper implementation impacts organic traffic. On the <a href="/projects/allspeech">Content Platform project</a>, technical SEO improvements contributed to a 45% increase in organic traffic.</p>
 
 <h2>Server-Side Rendering is Non-Negotiable</h2>
 

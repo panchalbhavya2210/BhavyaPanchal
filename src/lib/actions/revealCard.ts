@@ -1,22 +1,17 @@
 import { browser } from '$app/environment';
+import { loadGsap } from '$lib/gsap';
 
 export function revealCard(node: HTMLElement, index = 0) {
-	if (!browser) return { destroy() { } };
+	if (!browser) return { destroy() {} };
 
 	let killed = false;
 	let cleanup: (() => void) | null = null;
 	let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
 	(async () => {
-		const [gsapMod, stMod] = await Promise.all([
-			import('gsap'),
-			import('gsap/ScrollTrigger')
-		]);
-		const gsap = gsapMod.default;
-		const { ScrollTrigger } = stMod;
-		gsap.registerPlugin(ScrollTrigger);
-
-		if (killed) return;
+		const result = await loadGsap();
+		if (!result || killed) return;
+		const { gsap, ScrollTrigger } = result;
 
 		gsap.set(node, { y: 60, opacity: 0, scale: 0.94 });
 

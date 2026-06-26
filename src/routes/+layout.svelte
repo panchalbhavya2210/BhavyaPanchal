@@ -3,6 +3,7 @@
 	import { beforeNavigate, afterNavigate, goto } from '$app/navigation';
 	import posthog from 'posthog-js';
 	import type gsap from 'gsap';
+	import { loadGsap } from '$lib/gsap';
 	import Lenis from 'lenis';
 	import './layout.css';
 	import Header from '$lib/components/header.svelte';
@@ -45,24 +46,30 @@
 
 	function pickPhrase() {
 		const next = phrases[Math.floor(Math.random() * phrases.length)];
-		currentPhrase = next === currentPhrase ? phrases[(phrases.indexOf(next) + 1) % phrases.length] : next;
+		currentPhrase =
+			next === currentPhrase ? phrases[(phrases.indexOf(next) + 1) % phrases.length] : next;
 	}
 
 	onMount(async () => {
 		lenis = new Lenis({ autoRaf: true });
-		gsapMod = (await import('gsap')).default;
-		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-		gsapMod.registerPlugin(ScrollTrigger);
-		lenis.on('scroll', ScrollTrigger.update);
-		gsapMod.ticker.add((time) => lenis!.raf(time * 1000));
-		gsapMod.ticker.lagSmoothing(0);
+		const result = await loadGsap();
+		if (result) {
+			gsapMod = result.gsap;
+			result.gsap.ticker.add((time: number) => lenis!.raf(time * 1000));
+			result.gsap.ticker.lagSmoothing(0);
+			lenis.on('scroll', result.ScrollTrigger.update);
+		}
 	});
 
 	const schemas = allSchemas();
 
 	beforeNavigate(({ cancel, to }) => {
 		if (!to || transitioning) return;
-		if (to.url.pathname + to.url.search + to.url.hash === window.location.pathname + window.location.search + window.location.hash) return;
+		if (
+			to.url.pathname + to.url.search + to.url.hash ===
+			window.location.pathname + window.location.search + window.location.hash
+		)
+			return;
 		cancel();
 
 		transitioning = true;
@@ -137,12 +144,16 @@
 				duration: 0.25,
 				ease: 'power2.in'
 			})
-			.to(curtainEl, {
-				scaleY: 0,
-				transformOrigin: 'bottom',
-				duration: 0.55,
-				ease: 'expo.inOut'
-			}, '-=0.1');
+			.to(
+				curtainEl,
+				{
+					scaleY: 0,
+					transformOrigin: 'bottom',
+					duration: 0.55,
+					ease: 'expo.inOut'
+				},
+				'-=0.1'
+			);
 	});
 </script>
 
@@ -172,7 +183,7 @@
 </div>
 
 <Header />
-<main bind:this={mainEl}>
+<main bind:this={mainEl} id="main-content">
 	{@render children()}
 </main>
 <Footer />

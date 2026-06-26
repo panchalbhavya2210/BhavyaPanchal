@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
+	import { loadGsap } from '$lib/gsap';
 
 	interface Props {
 		src: string;
@@ -36,26 +36,29 @@
 	onMount(() => {
 		if (!image) return;
 
-		let scrollTriggers: Array<{ kill: () => void }> = [];
+		let killed = false;
+		let cleanup: (() => void) | undefined;
 
-		if (reveal) {
-			gsap.set(image, {
-				scale: 1.08,
-				opacity: 0
-			});
+		(async () => {
+			const result = await loadGsap();
+			if (!result || killed) return;
+			const { gsap, ScrollTrigger } = result;
 
-			gsap.to(image, {
-				scale: 1,
-				opacity: 1,
-				duration: 1.2,
-				ease: 'power3.out'
-			});
-		}
+			if (reveal) {
+				gsap.set(image, {
+					scale: 1.08,
+					opacity: 0
+				});
 
-		if (parallax) {
-			import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-				gsap.registerPlugin(ScrollTrigger);
+				gsap.to(image, {
+					scale: 1,
+					opacity: 1,
+					duration: 1.2,
+					ease: 'power3.out'
+				});
+			}
 
+			if (parallax) {
 				gsap.to(image, {
 					yPercent: parallaxSpeed * -100,
 					ease: 'none',
@@ -67,12 +70,14 @@
 					}
 				});
 
-				scrollTriggers = ScrollTrigger.getAll() as Array<{ kill: () => void }>;
-			});
-		}
+				const triggers = ScrollTrigger.getAll() as Array<{ kill: () => void }>;
+				cleanup = () => triggers.forEach((t) => t.kill());
+			}
+		})();
 
 		return () => {
-			scrollTriggers.forEach((t) => t.kill());
+			killed = true;
+			cleanup?.();
 		};
 	});
 </script>

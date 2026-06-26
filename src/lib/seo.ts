@@ -6,26 +6,28 @@ export const site = {
 	url: dev ? 'http://localhost:5173' : 'https://bhavyapanchal.in',
 	titleSeparator: ' — ',
 	description:
-		'Bhavya Panchal is a frontend developer and UI engineer based in Ahmedabad, India. Specializing in React, SvelteKit, TypeScript, and modern web technologies to build fast, accessible, and scalable web applications. Available for full-time roles and freelance projects.',
+		'Bhavya Panchal is a frontend developer and UI engineer based in Ahmedabad, India. Specializing in React, Next.js, Remix, Shopify Hydrogen, SvelteKit, TypeScript, and modern web technologies to build fast, accessible, and scalable web applications. Available for freelance projects and full-time roles worldwide.',
 	keywords: [
 		'Bhavya Panchal',
 		'frontend developer',
 		'frontend developer Ahmedabad',
 		'React developer Ahmedabad',
-		'UI engineer',
-		'web developer Ahmedabad',
-		'UI developer Gujarat',
-		'frontend developer India',
-		'React developer India',
+		'Next.js developer India',
+		'Shopify Hydrogen developer',
+		'Remix developer',
+		'UI engineer India',
+		'freelance React developer',
 		'hire frontend developer',
 		'SvelteKit developer',
-		'Next.js developer',
 		'TypeScript developer',
+		'JavaScript developer India',
+		'web developer Gujarat',
+		'React performance optimization',
+		'Core Web Vitals',
 		'GSAP',
 		'Tailwind CSS',
 		'Sanity CMS',
 		'design systems',
-		'performance optimization',
 		'web accessibility',
 		'Ahmedabad',
 		'Gujarat',
@@ -33,7 +35,7 @@ export const site = {
 		'SolePoint Solutions',
 		'motion design',
 		'UI interactions',
-		'web developer portfolio'
+		'frontend developer portfolio'
 	],
 	author: 'Bhavya Panchal',
 	locale: 'en_IN',
@@ -79,7 +81,8 @@ export const sitemapEntries: SitemapEntry[] = [
 		path: '/',
 		changefreq: 'weekly',
 		priority: 1.0,
-		title: 'Bhavya Panchal — Frontend Developer & UI Engineer | Ahmedabad, India',
+		title:
+			'Bhavya Panchal — Frontend Developer & UI Engineer | React, Next.js, Shopify Hydrogen | Ahmedabad, India',
 		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
@@ -111,6 +114,13 @@ export const sitemapEntries: SitemapEntry[] = [
 		lastmod: new Date().toISOString().split('T')[0]
 	},
 	{
+		path: '/services',
+		changefreq: 'monthly',
+		priority: 0.9,
+		title: 'Services — Bhavya Panchal | React, Next.js, Shopify Hydrogen Developer',
+		lastmod: new Date().toISOString().split('T')[0]
+	},
+	{
 		path: '/contact',
 		changefreq: 'monthly',
 		priority: 0.8,
@@ -122,6 +132,7 @@ export const sitemapEntries: SitemapEntry[] = [
 export const navigationSections = [
 	{ name: 'Home', url: '/' },
 	{ name: 'About', url: '/about-me' },
+	{ name: 'Services', url: '/services' },
 	{ name: 'Projects', url: '/projects' },
 	{ name: 'Blog', url: '/blog' },
 	{ name: 'Contact', url: '/contact' }
@@ -163,9 +174,9 @@ export function personSchema() {
 		name: 'Bhavya Panchal',
 		alternateName: 'Bhavya',
 		description:
-			'Frontend developer and UI engineer specializing in fast, accessible, and scalable digital experiences.',
+			'Frontend developer and UI engineer specialising in fast, accessible, and scalable digital experiences. Expert in React, Next.js, Remix, Shopify Hydrogen, SvelteKit, and TypeScript. Based in Ahmedabad, India.',
 		url: site.url,
-		image: absoluteUrl(site.image),
+		image: absoluteUrl('/bhavya-panchal.webp'),
 		jobTitle: 'Frontend Developer & UI Engineer',
 		worksFor: {
 			'@type': 'Organization',
@@ -181,18 +192,26 @@ export function personSchema() {
 		knowsAbout: [
 			'Frontend Development',
 			'UI Engineering',
-			'Design Systems',
-			'Performance Optimization',
-			'Web Accessibility',
-			'Motion Design',
+			'React',
+			'Next.js',
+			'Remix',
+			'Shopify Hydrogen',
 			'SvelteKit',
 			'TypeScript',
-			'Next.js',
+			'JavaScript',
 			'Tailwind CSS',
 			'GSAP',
+			'Framer Motion',
+			'Design Systems',
+			'Performance Optimization',
+			'Core Web Vitals',
+			'Web Accessibility',
+			'Technical SEO',
+			'Motion Design',
 			'Sanity CMS',
 			'Firebase',
-			'Supabase'
+			'Supabase',
+			'Node.js'
 		],
 		alumniOf: {
 			'@type': 'EducationalOrganization',
@@ -202,7 +221,8 @@ export function personSchema() {
 			'https://github.com/panchalbhavya2210',
 			'https://linkedin.com/in/bhavyapanchal',
 			'https://x.com/panchalbhavya22'
-		]
+		],
+		knowsLanguage: ['English', 'Hindi', 'Gujarati']
 	};
 }
 
@@ -262,11 +282,120 @@ export function organizationSchema() {
 			addressRegion: 'Gujarat',
 			addressCountry: 'IN'
 		},
+		areaServed: [
+			{ '@type': 'Country', name: 'India' },
+			{ '@type': 'Country', name: 'United States' },
+			{ '@type': 'Country', name: 'United Kingdom' },
+			{ '@type': 'Country', name: 'Australia' },
+			{ '@type': 'Continent', name: 'Europe' }
+		],
 		sameAs: [
 			'https://github.com/panchalbhavya2210',
 			'https://linkedin.com/in/bhavyapanchal',
 			'https://x.com/panchalbhavya22'
 		]
+	};
+}
+
+export function professionalServiceSchema() {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'ProfessionalService',
+		'@id': `${site.url}/#professionalservice`,
+		name: `${site.name} — Frontend Development Services`,
+		description:
+			'Professional frontend development services including React, Next.js, Remix, Shopify Hydrogen, SvelteKit, performance optimization, UI engineering, and technical SEO. Based in Ahmedabad, India.',
+		url: `${site.url}/services`,
+		provider: {
+			'@type': 'Person',
+			'@id': `${site.url}/#person`,
+			name: site.author
+		},
+		areaServed: [
+			{ '@type': 'City', name: 'Ahmedabad' },
+			{ '@type': 'State', name: 'Gujarat' },
+			{ '@type': 'Country', name: 'India' }
+		],
+		hasOfferCatalog: {
+			'@type': 'OfferCatalog',
+			name: 'Frontend Development Services',
+			itemListElement: [
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'React Development',
+						description:
+							'High-performance single-page applications, server-rendered platforms, and component architectures built with React and TypeScript.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Next.js Development',
+						description:
+							'Full-stack React applications with server-side rendering, static generation, API routes, and the App Router.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Shopify & Hydrogen Development',
+						description:
+							'Custom Shopify storefronts, Hydrogen headless commerce, and Liquid theme development for e-commerce brands.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Performance Optimization',
+						description:
+							'Core Web Vitals audits, bundle analysis, rendering optimisation, and systematic performance improvements.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'UI Engineering',
+						description:
+							'Design systems, component libraries, and pixel-perfect implementations that scale across teams and products.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Technical SEO',
+						description:
+							'Semantic HTML, structured data, Core Web Vitals optimisation, and crawlability audits for JavaScript applications.'
+					}
+				}
+			]
+		}
+	};
+}
+
+export function speakableSchema() {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'SpeakableSpecification',
+		xpath: ['/html/head/title', '/html/head/meta[@name="description"]/@content']
+	};
+}
+
+export function imageObjectSchema(url: string, caption: string, width = 1200, height = 630) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'ImageObject',
+		contentUrl: absoluteUrl(url),
+		caption,
+		width,
+		height,
+		representativeOfPage: true
 	};
 }
 
@@ -303,8 +432,10 @@ export function allSchemas() {
 		webSiteSchema(),
 		organizationSchema(),
 		personSchema(),
+		professionalServiceSchema(),
 		siteNavigationSchema(),
 		breadcrumbSchema(),
-		portfolioSchema()
+		portfolioSchema(),
+		speakableSchema()
 	];
 }

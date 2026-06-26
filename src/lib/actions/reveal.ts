@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { loadGsap } from '$lib/gsap';
 
 export function reveal(node: HTMLElement, delay = 0) {
 	if (!browser) return { destroy() {} };
@@ -8,15 +9,9 @@ export function reveal(node: HTMLElement, delay = 0) {
 	let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
 	(async () => {
-		const [gsapMod, stMod] = await Promise.all([
-			import('gsap'),
-			import('gsap/ScrollTrigger')
-		]);
-		const gsap = gsapMod.default;
-		const { ScrollTrigger } = stMod;
-		gsap.registerPlugin(ScrollTrigger);
-
-		if (killed) return;
+		const result = await loadGsap();
+		if (!result || killed) return;
+		const { gsap, ScrollTrigger } = result;
 
 		gsap.set(node, { y: 28, opacity: 0 });
 

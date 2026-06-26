@@ -11,6 +11,8 @@
 		type?: 'button' | 'submit' | 'reset';
 		variant?: 'primary' | 'secondary';
 		onclick?: (event: MouseEvent) => void;
+		target?: '_blank' | '_self' | '_parent' | '_top';
+		rel?: string;
 	}
 
 	let {
@@ -21,7 +23,9 @@
 		disabled = false,
 		type = 'button',
 		variant = 'primary',
-		onclick
+		onclick,
+		target,
+		rel
 	}: Props = $props();
 
 	const variants = {
@@ -41,6 +45,8 @@
 {#if href}
 	<a
 		{href}
+		{target}
+		{rel}
 		class={`group relative inline-flex h-14 items-center overflow-hidden transition-all duration-300 hover:shadow-lg ${variants[variant].button} ${className}`}
 	>
 		<Typography

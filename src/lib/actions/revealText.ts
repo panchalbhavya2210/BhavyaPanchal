@@ -1,20 +1,15 @@
 import { browser } from '$app/environment';
+import { loadGsap } from '$lib/gsap';
 
 export function revealText(node: HTMLElement, enabled = true) {
-	if (!browser || !enabled) return { destroy() { } };
+	if (!browser || !enabled) return { destroy() {} };
 
 	let killed = false;
 
 	(async () => {
-		const [gsapMod, stMod] = await Promise.all([
-			import('gsap'),
-			import('gsap/ScrollTrigger')
-		]);
-		const gsap = gsapMod.default;
-		const { ScrollTrigger } = stMod;
-		gsap.registerPlugin(ScrollTrigger);
-
-		if (killed) return;
+		const result = await loadGsap();
+		if (!result || killed) return;
+		const { gsap } = result;
 
 		const originalHTML = node.innerHTML;
 

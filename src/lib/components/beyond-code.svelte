@@ -76,7 +76,9 @@
 						loading="lazy"
 						class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 					/>
-					<div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
+					<div
+						class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"
+					></div>
 					<div class="relative z-10 flex h-full flex-col justify-end p-6">
 						<Typography variant="h4" class="font-medium text-white">
 							{item.title}

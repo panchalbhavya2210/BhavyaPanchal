@@ -23,13 +23,19 @@
 			<div use:reveal={0.06}>
 				<Typography variant="caption" class="mb-5 block">Navigation</Typography>
 				<div class="space-y-3">
-					<a href="/" class="block text-sm text-muted-foreground hover:text-primary transition-colors"
-						>Home</a
+					<a
+						href="/"
+						class="block text-sm text-muted-foreground hover:text-primary transition-colors">Home</a
 					>
 					<a
 						href="/about-me"
 						class="block text-sm text-muted-foreground hover:text-primary transition-colors"
 						>About</a
+					>
+					<a
+						href="/services"
+						class="block text-sm text-muted-foreground hover:text-primary transition-colors"
+						>Services</a
 					>
 					<a
 						href="/projects"
@@ -38,8 +44,7 @@
 					>
 					<a
 						href="/blog"
-						class="block text-sm text-muted-foreground hover:text-primary transition-colors"
-						>Blog</a
+						class="block text-sm text-muted-foreground hover:text-primary transition-colors">Blog</a
 					>
 					<a
 						href="/contact"

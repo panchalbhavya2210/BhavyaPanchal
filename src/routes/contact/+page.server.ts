@@ -11,7 +11,7 @@ config({ path: resolve(process.cwd(), '.env') });
 function getTransporter() {
 	const user = process.env.GMAIL_USER;
 	const pass = process.env.GMAIL_APP_PASSWORD;
-	console.log(user, pass)
+	console.log(user, pass);
 
 	if (!user || !pass) {
 		throw new Error('GMAIL_USER and GMAIL_APP_PASSWORD environment variables are required.');

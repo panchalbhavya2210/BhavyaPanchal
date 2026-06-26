@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { loadGsap } from '$lib/gsap';
 	import type gsap from 'gsap';
 
 	const links = [
 		{ label: 'Home', href: '/' },
 		{ label: 'About', href: '/about-me' },
+		{ label: 'Services', href: '/services' },
 		{ label: 'Projects', href: '/projects' },
 		{ label: 'Blog', href: '/blog' },
 		{ label: 'Contact', href: '/contact' }
@@ -106,8 +108,9 @@
 		document.addEventListener('click', handleOutsideClick);
 
 		(async () => {
-			const gsapModule = await import('gsap');
-			const gsap = gsapModule.default;
+			const result = await loadGsap();
+			if (!result) return;
+			const gsap = result.gsap;
 
 			tl = gsap.timeline({
 				paused: true

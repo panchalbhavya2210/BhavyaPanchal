@@ -43,6 +43,7 @@
 		class?: string;
 		animate?: boolean;
 		children?: Snippet;
+		'aria-hidden'?: 'true' | 'false';
 	};
 
 	let {
@@ -51,7 +52,8 @@
 		color = 'default',
 		animate = false,
 		class: className = '',
-		children
+		children,
+		'aria-hidden': ariaHidden
 	}: Props = $props();
 
 	const headingMap: Record<string, string> = {
@@ -68,6 +70,7 @@
 <svelte:element
 	this={as}
 	use:revealText={animate}
+	aria-hidden={ariaHidden}
 	class={typographyVariants({
 		variant,
 		color,

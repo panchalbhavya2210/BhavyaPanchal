@@ -76,6 +76,8 @@
 								alt={post.title}
 								class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 								loading="lazy"
+								width="400"
+								height="225"
 							/>
 						</div>
 						<div class="p-6 flex flex-col flex-1">
@@ -100,7 +102,9 @@
 								{post.description}
 							</Typography>
 
-							<div class="flex items-center gap-5 text-xs text-muted-foreground mt-auto pt-4 border-t border-border/40">
+							<div
+								class="flex items-center gap-5 text-xs text-muted-foreground mt-auto pt-4 border-t border-border/40"
+							>
 								<span class="flex items-center gap-1.5">
 									<Calendar class="size-3.5" />
 									{new Date(post.date).toLocaleDateString('en-IN', {

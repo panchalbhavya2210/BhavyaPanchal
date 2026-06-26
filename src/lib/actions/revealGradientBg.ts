@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { loadGsap } from '$lib/gsap';
 
 interface Blob {
 	color: string;
@@ -11,21 +12,15 @@ interface Blob {
 }
 
 export function revealGradientBg(node: HTMLElement) {
-	if (!browser) return { destroy() { } };
+	if (!browser) return { destroy() {} };
 
 	let killed = false;
 	let cleanup: (() => void) | null = null;
 
 	(async () => {
-		const [gsapMod, stMod] = await Promise.all([
-			import('gsap'),
-			import('gsap/ScrollTrigger')
-		]);
-		const gsap = gsapMod.default;
-		const { ScrollTrigger } = stMod;
-		gsap.registerPlugin(ScrollTrigger);
-
-		if (killed) return;
+		const result = await loadGsap();
+		if (!result || killed) return;
+		const { gsap, ScrollTrigger } = result;
 
 		node.style.position = 'relative';
 		node.style.overflow = 'hidden';

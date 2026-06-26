@@ -23,7 +23,7 @@
 </script>
 
 <Section class="sm pb-0 pr-0!" size="sm">
-	<footer>
+	<div>
 		<Container size="full">
 			<div class=" max-w-1/2">
 				<Typography variant="h2" as="h2" animate class="font-normal uppercase">
@@ -101,7 +101,11 @@
 					class="space-y-6 lg:mr-2 max-md:mb-6"
 				>
 					{#if success}
-						<div class="flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-4">
+						<div
+							class="flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-4"
+							role="status"
+							aria-live="polite"
+						>
 							<CheckCircle class="size-5 text-green-600 mt-0.5 shrink-0" />
 							<div>
 								<p class="text-sm font-medium text-green-800">Message sent successfully!</p>
@@ -113,7 +117,11 @@
 					{/if}
 
 					{#if error}
-						<div class="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4">
+						<div
+							class="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4"
+							role="alert"
+							aria-live="assertive"
+						>
 							<AlertCircle class="size-5 text-red-600 mt-0.5 shrink-0" />
 							<div>
 								<p class="text-sm font-medium text-red-800">Error</p>
@@ -137,6 +145,8 @@
 								bind:value={form.name}
 								placeholder="John Doe"
 								required
+								aria-required="true"
+								autocomplete="name"
 								class="w-full border-0 border-b outline-0 ring-0 border-black/20 bg-transparent px-0 py-2 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
 							/>
 						</div>
@@ -155,6 +165,8 @@
 								bind:value={form.email}
 								placeholder="john@example.com"
 								required
+								aria-required="true"
+								autocomplete="email"
 								class="w-full border-0 border-b outline-0 ring-0 border-black/20 bg-transparent px-0 py-2 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
 							/>
 						</div>
@@ -173,6 +185,7 @@
 							name="subject"
 							bind:value={form.subject}
 							placeholder="Project inquiry"
+							autocomplete="off"
 							class="w-full border-0 border-b outline-0 ring-0 border-black/20 bg-transparent px-0 py-2 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary"
 						/>
 					</div>
@@ -214,7 +227,13 @@
 					<div class="space-y-8">
 						<div class="aspect-4/5 w-full overflow-hidden bg-neutral-800">
 							<div class="flex h-full items-center justify-center">
-								<img src={FooterImg} alt="Bhavya Panchal" loading="lazy" />
+								<img
+									src={FooterImg}
+									alt="Bhavya Panchal — Frontend Developer and UI Engineer, Ahmedabad India"
+									width="420"
+									height="525"
+									loading="lazy"
+								/>
 							</div>
 						</div>
 
@@ -285,5 +304,5 @@
 				</div>
 			</div>
 		</Container>
-	</footer>
+	</div>
 </Section>

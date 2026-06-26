@@ -21,7 +21,7 @@
 		name: project.title,
 		description: project.description,
 		image: absoluteUrl(project.image),
-		url: project.href || absoluteUrl('/projects'),
+		url: absoluteUrl(`/projects/${project.id}`),
 		position: index + 1,
 		about: project.category,
 		keywords: project.stack.join(', '),

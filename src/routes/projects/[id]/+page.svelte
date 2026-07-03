@@ -7,6 +7,7 @@
 	import { ArrowLeft, Clock, Users, Briefcase, Building2 } from '@lucide/svelte';
 	import SeoMeta from '$lib/components/seo-meta.svelte';
 	import JsonLd from '$lib/components/json-ld.svelte';
+	import RelatedContent from '$lib/components/related-content.svelte';
 	import { breadcrumbSchema, absoluteUrl, site } from '$lib/seo';
 
 	let { data } = $props();
@@ -206,7 +207,7 @@
 					would love to discuss your project.
 				</Typography>
 				<div class="flex flex-wrap justify-center gap-4">
-					<ButtonPrimary href="/contact" icon={Arrow}>START A PROJECT</ButtonPrimary>
+					<ButtonPrimary href="/contact" icon={Arrow}>DISCUSS YOUR PROJECT</ButtonPrimary>
 					{#if project.liveUrl}
 						<ButtonPrimary
 							href={project.liveUrl}
@@ -220,6 +221,8 @@
 					{/if}
 				</div>
 			</div>
+
+			<RelatedContent currentSlug={project.id} type="project" />
 		</article>
 	</Container>
 </Section>

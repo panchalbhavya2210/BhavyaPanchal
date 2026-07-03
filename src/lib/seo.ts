@@ -2,11 +2,11 @@ import { dev } from '$app/environment';
 
 export const site = {
 	name: 'Bhavya Panchal',
-	tagline: 'Frontend Developer & UI Engineer',
+	tagline: 'Frontend Developer & Next.js Expert',
 	url: dev ? 'http://localhost:5173' : 'https://bhavyapanchal.in',
 	titleSeparator: ' — ',
 	description:
-		'Bhavya Panchal is a frontend developer and UI engineer based in Ahmedabad, India. Specializing in React, Next.js, Remix, Shopify Hydrogen, SvelteKit, TypeScript, and modern web technologies to build fast, accessible, and scalable web applications. Available for freelance projects and full-time roles worldwide.',
+		'Bhavya Panchal is a freelance frontend developer and Next.js expert based in Ahmedabad, India. Specializing in React, Next.js, SvelteKit, Shopify Hydrogen, Remix, TypeScript, and modern web technologies to build fast, accessible, and SEO-friendly web applications. Available for freelance projects and full-time roles worldwide.',
 	keywords: [
 		'Bhavya Panchal',
 		'frontend developer',
@@ -35,7 +35,19 @@ export const site = {
 		'SolePoint Solutions',
 		'motion design',
 		'UI interactions',
-		'frontend developer portfolio'
+		'frontend developer portfolio',
+		'freelance frontend developer India',
+		'Svelte developer India',
+		'website speed optimization expert',
+		'SEO friendly website developer',
+		'Figma to code developer',
+		'headless CMS developer',
+		'Sanity CMS developer India',
+		'web performance expert',
+		'portfolio website developer',
+		'website developer Ahmedabad',
+		'hire Next.js developer',
+		'hire Svelte developer'
 	],
 	author: 'Bhavya Panchal',
 	locale: 'en_IN',
@@ -372,6 +384,42 @@ export function professionalServiceSchema() {
 						name: 'Technical SEO',
 						description:
 							'Semantic HTML, structured data, Core Web Vitals optimisation, and crawlability audits for JavaScript applications.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Svelte & SvelteKit Development',
+						description:
+							'Lightning-fast web applications built with Svelte 5 and SvelteKit — compiler-first framework delivering minimal JavaScript bundles and exceptional runtime performance.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Headless CMS Integration',
+						description:
+							'Sanity, Contentful, Strapi, and headless CMS integrations for content-driven websites with structured data, preview environments, and multi-channel delivery.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Website Speed Optimization',
+						description:
+							'Core Web Vitals audits, Lighthouse optimization, image optimization, code splitting, and performance tuning to achieve 95+ Lighthouse scores and sub-second page loads.'
+					}
+				},
+				{
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: 'Figma to Code Conversion',
+						description:
+							'Pixel-perfect, responsive, and accessible HTML/CSS/React/Svelte implementations from Figma design files with design system documentation.'
 					}
 				}
 			]

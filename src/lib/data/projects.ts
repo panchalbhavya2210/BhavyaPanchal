@@ -1,9 +1,9 @@
 import ElectronEnterprise from '$lib/assets/electron-enterprise.webp';
 import RakshitJain from '$lib/assets/rakshit-jain.webp';
-import HealthECom from '$lib/assets/health-ecom.webp';
-import Urban from '$lib/assets/urban-mobility.webp';
-import Allspeech from '$lib/assets/allspeech.webp';
-import FII from '$lib/assets/foreign-inverstor-data.webp';
+import HealthECom from '$lib/assets/superfoodies-shopify-ecommerce.webp';
+import Urban from '$lib/assets/mybyk-bike-rental-platform.webp';
+import Allspeech from '$lib/assets/allspeech-content-platform.webp';
+import FII from '$lib/assets/fii-datalyzer-investment-platform.webp';
 
 export type Project = {
 	id: string;
@@ -111,9 +111,9 @@ export const projects: Project[] = [
 	},
 	{
 		id: 'superfoodies',
-		title: 'Superfoodies',
+		title: 'Health & Wellness E-Commerce',
 		description:
-			'Dutch superfoods and supplements e-commerce platform focused on health, wellness, and customer retention.',
+			'Shopify e-commerce platform for a premium health and wellness brand — optimised for mobile performance, conversion rate, and customer retention.',
 		outcomes: [
 			'28% improvement in mobile conversion rate',
 			'2.1s → 0.8s avg page load time',
@@ -122,19 +122,19 @@ export const projects: Project[] = [
 		],
 		stack: ['Shopify', 'Liquid', 'JavaScript', 'Analytics'],
 		category:
-			'Dutch superfoods and supplements e-commerce platform selling green juices, collagen, protein powders, and wellness products.',
+			'Shopify e-commerce platform for a health and wellness brand selling premium supplements and superfoods.',
 		image: HealthECom,
 		href: '',
 		problem:
-			'Superfoodies, a Netherlands-based superfoods and supplements brand, approached me with a Shopify store that was underperforming on mobile. They sell premium health products including Green Juice, collagen supplements, hormone balance capsules, protein powders, and immunity boosters. Average page load times of 2.1s were causing a 68% bounce rate on mobile devices. Cart abandonment stood at 72% — significantly above the industry average. The existing theme was poorly optimised with render-blocking scripts and unoptimised product images.',
+			'A health and wellness e-commerce brand approached me with a Shopify store that was underperforming on mobile. They sell premium supplements including collagen, protein powders, and immunity products. Average page load times of 2.1s were causing a 68% bounce rate on mobile devices. Cart abandonment stood at 72% — significantly above the industry average. The existing theme was poorly optimised with render-blocking scripts and unoptimised product images.',
 		solution:
-			'I completely overhauled the Shopify theme, focusing on mobile-first performance. Replaced heavy third-party apps with custom Liquid snippets and vanilla JavaScript. Implemented lazy loading for product images with proper WebP formats and responsive sizes. Restructured the product page layout to prioritise above-fold content — product image, title, price, and Add to Cart button visible without scrolling. Built custom collection filters for their extensive product catalogue across categories like energy, gut health, hormones, and immunity.',
+			'I completely overhauled the Shopify theme, focusing on mobile-first performance. Replaced heavy third-party apps with custom Liquid snippets and vanilla JavaScript. Implemented lazy loading for product images with proper WebP formats and responsive sizes. Restructured the product page layout to prioritise above-fold content — product image, title, price, and Add to Cart button visible without scrolling. Built custom collection filters for their extensive product catalogue across multiple wellness categories.',
 		challenges:
-			"Shopify's app ecosystem creates a tension between functionality and performance. Many apps inject render-blocking JavaScript and unused CSS. I audited every app, removed non-essential ones, and replaced bloated apps with custom implementations — including a lightweight cart drawer, predictive search, and product recommendation widgets built from scratch. The multi-language Dutch/English content required careful Liquid template structuring.",
+			"Shopify's app ecosystem creates a tension between functionality and performance. Many apps inject render-blocking JavaScript and unused CSS. I audited every app, removed non-essential ones, and replaced bloated apps with custom implementations — including a lightweight cart drawer, predictive search, and product recommendation widgets built from scratch. Multi-language content required careful Liquid template structuring.",
 		performanceImprovements:
 			'Average page load dropped from 2.1s to 0.8s (62% reduction). Mobile Lighthouse Performance score improved from 42 to 88. Largest Contentful Paint reduced by 55%. Time to Interactive improved by 1.2 seconds. Bundle size reduced by 45% through script consolidation.',
 		seoImprovements:
-			'Implemented structured product data (Product schema with price, availability, and reviews). Optimised meta titles and descriptions for all product and collection pages in both Dutch and English. Created category page content to target long-tail health and wellness keywords. Fixed duplicate content issues from URL parameters.',
+			'Implemented structured product data (Product schema with price, availability, and reviews). Optimised meta titles and descriptions for all product and collection pages. Created category page content to target long-tail health and wellness keywords. Fixed duplicate content issues from URL parameters.',
 		accessibilityImprovements:
 			'Added skip-to-content and skip-to-product links. Improved colour contrast on product badges and sale indicators. Made the cart drawer keyboard-accessible with focus trapping. Added ARIA labels to all interactive elements including variant selectors and quantity inputs.',
 		businessOutcome:
@@ -145,14 +145,14 @@ export const projects: Project[] = [
 		duration: '4 weeks',
 		industry: 'Health & E-Commerce',
 		teamSize: '2 (Developer + Shopify Admin)',
-		liveUrl: 'https://superfoodies.nl',
+		liveUrl: '',
 		repoUrl: ''
 	},
 	{
 		id: 'mybyk',
-		title: 'MYBYK',
+		title: 'Urban Mobility Platform',
 		description:
-			'Urban bike rental and mobility platform simplifying sustainable transportation across Indian cities.',
+			'Bike rental and urban mobility platform simplifying sustainable transportation across Indian cities.',
 		outcomes: [
 			'92 Lighthouse Performance on mobile',
 			'97% accessibility score (WCAG 2.1 AA)',
@@ -165,7 +165,7 @@ export const projects: Project[] = [
 		image: Urban,
 		href: '',
 		problem:
-			'MYBYK, an urban bike rental startup operating across Indian cities, needed a web application to help users find, rent, and manage bike subscriptions. The platform required real-time station data integration, an interactive map interface for locating available bikes, and a seamless subscription management flow — all while maintaining fast performance on mobile devices in areas with unreliable connectivity.',
+			'An urban mobility startup operating across Indian cities needed a web application to help users find, rent, and manage bike subscriptions. The platform required real-time station data integration, an interactive map interface for locating available bikes, and a seamless subscription management flow — all while maintaining fast performance on mobile devices in areas with unreliable connectivity.',
 		solution:
 			'I built a React application with TypeScript, integrating multiple APIs for real-time bike availability and station data. The map interface used a lightweight approach to minimise DOM nodes while providing an intuitive bike-finding experience. Netlify Functions handled API proxying and data aggregation server-side. I implemented an offline-first strategy using service workers for station data caching, enabling basic functionality without internet connectivity.',
 		challenges:
@@ -177,19 +177,19 @@ export const projects: Project[] = [
 		accessibilityImprovements:
 			'Achieved 97% WCAG 2.1 AA compliance. Every interactive element — including map markers and station selectors — is fully keyboard-navigable. Screen reader announcements for station updates and real-time changes. High-contrast mode for the map interface. Reduced motion and animation for vestibular disorder considerations.',
 		businessOutcome:
-			'The platform serves 5,000+ active monthly users across Indian cities. User session duration increased by 22% as users explored additional stations and subscription plans. The accessibility-first approach received positive feedback from users. MYBYK continues to expand to new cities with the platform serving as their primary digital touchpoint.',
+			'The platform serves 5,000+ active monthly users across Indian cities. User session duration increased by 22% as users explored additional stations and subscription plans. The accessibility-first approach received positive feedback from users. The platform continues to expand to new cities as the primary digital touchpoint.',
 		lessonsLearned:
 			'Accessibility-first design improves the experience for all users, not just those with disabilities. Real-time data integration requires careful caching strategies to maintain performance. Offline-first patterns are practical for web applications in emerging markets with unreliable connectivity.',
 		role: 'Frontend Developer',
 		duration: '8 weeks',
 		industry: 'Mobility & Transportation',
 		teamSize: '3 (Developer, Designer, Backend)',
-		liveUrl: 'https://mybyk.in',
+		liveUrl: '',
 		repoUrl: ''
 	},
 	{
 		id: 'allspeech',
-		title: 'Allspeech',
+		title: 'Content Marketing Platform',
 		description:
 			'Content platform and ecosystem designed for discovery, engagement, and lead generation through long-form content.',
 		outcomes: [
@@ -216,9 +216,9 @@ export const projects: Project[] = [
 		accessibilityImprovements:
 			'Full keyboard navigation for article reading and content discovery. Proper heading hierarchy (H1 → H2 → H3). Accessible embedded content with iframe titles and ARIA labels. Skip-to-content and skip-to-related-articles links. Reading mode with adjustable font size and contrast.',
 		businessOutcome:
-			"Organic traffic grew by 45% within 3 months of launch, driven by improved technical SEO and content architecture. Lead conversion rate reached 3.5%, exceeding the 2.1% industry average. Average time on page increased by 60%. The platform's content discovery features led to users reading 3.2 articles per session on average.",
+			'Organic traffic grew by 45% within 3 months of launch, driven by improved technical SEO and content architecture. Lead conversion rate reached 3.5%, exceeding the 2.1% industry average. Average time on page increased by 60%. The platform content discovery features led to users reading 3.2 articles per session on average.',
 		lessonsLearned:
-			'Content-heavy sites benefit enormously from progressive hydration — users perceive the site as fast even when total JavaScript is significant. Typeform integration improved conversions more than expected, likely due to the conversational UX. Topic clusters and strong internal linking are perhaps the highest-ROI SEO investment for content sites.',
+			'Content-heavy sites benefit enormously from progressive hydration — users perceive the site as fast even when total JavaScript is significant. Conversational lead capture improved conversions more than expected, likely due to the conversational UX. Topic clusters and strong internal linking are perhaps the highest-ROI SEO investment for content sites.',
 		role: 'Lead Frontend Developer',
 		duration: '10 weeks',
 		industry: 'Content & Media',

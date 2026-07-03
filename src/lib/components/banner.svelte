@@ -27,7 +27,7 @@
 						>CRAFT</Typography
 					>
 
-					<h1 class="sr-only">Bhavya Panchal — Design, Code &amp; Craft</h1>
+					<h1 class="sr-only">Bhavya Panchal — Freelance Frontend Developer &amp; Next.js Expert, Ahmedabad, India</h1>
 
 					<p class="mt-4 font-heading text-lg sm:text-xl font-semibold tracking-tight text-black">
 						Frontend Developer &amp; UI Engineer
@@ -39,9 +39,9 @@
 					</p>
 				</div>
 				<div class="mt-8 flex flex-wrap gap-4" use:reveal={0.35}>
-					<ButtonPrimary href="/projects" icon={Arrow}>VIEW PROJECTS</ButtonPrimary>
+					<ButtonPrimary href="/projects" icon={Arrow}>SEE MY WORK</ButtonPrimary>
 					<ButtonPrimary href="/contact" variant="secondary" icon={Arrow}
-						>GET IN TOUCH</ButtonPrimary
+						>HIRE A FRONTEND DEVELOPER</ButtonPrimary
 					>
 				</div>
 			</div>

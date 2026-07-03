@@ -5,9 +5,12 @@
 	import ButtonPrimary from '$lib/components/ui/button-primary.svelte';
 	import Arrow from '@lucide/svelte/icons/arrow-up-right';
 	import { ArrowLeft, Check } from '@lucide/svelte';
+	import Accordion from '$lib/components/ui/accordion.svelte';
 	import SeoMeta from '$lib/components/seo-meta.svelte';
 	import JsonLd from '$lib/components/json-ld.svelte';
+	import RelatedContent from '$lib/components/related-content.svelte';
 	import { breadcrumbSchema, absoluteUrl, site } from '$lib/seo';
+	import { reveal } from '$lib/actions/reveal';
 
 	let { data } = $props();
 	const service = $derived(data.service);
@@ -19,6 +22,22 @@
 		path: `/services/${service.slug}`,
 		type: 'website' as const
 	};
+
+	const faqSchema = $derived(
+		service.faq.length > 0
+			? {
+					'@type': 'FAQPage',
+					mainEntity: service.faq.map((item) => ({
+						'@type': 'Question',
+						name: item.question,
+						acceptedAnswer: {
+							'@type': 'Answer',
+							text: item.answer
+						}
+					}))
+				}
+			: null
+	);
 </script>
 
 <SeoMeta {meta} />
@@ -58,7 +77,8 @@
 		breadcrumbSchema([
 			{ name: 'Services', path: '/services' },
 			{ name: service.title, path: `/services/${service.slug}` }
-		])
+		]),
+		...(faqSchema ? [faqSchema] : [])
 	]}
 />
 
@@ -139,14 +159,34 @@
 				</div>
 			</div>
 
-			<div class="border-t border-border pt-10 text-center">
+			{#if service.faq.length > 0}
+				<div class="mb-16">
+					<h2 class="font-heading text-2xl font-semibold mb-6">
+						Frequently Asked Questions
+					</h2>
+					<div class="grid gap-4 sm:grid-cols-2">
+						{#each service.faq as item, i (item.question)}
+							<div use:reveal={i * 0.06}>
+								<Accordion>
+									{#snippet summary()}{item.question}{/snippet}
+									{#snippet content()}{item.answer}{/snippet}
+								</Accordion>
+							</div>
+						{/each}
+					</div>
+				</div>
+			{/if}
+
+			<RelatedContent currentSlug={service.slug} type="service" />
+
+			<div class="border-t border-border pt-10 mt-12 text-center">
 				<Typography variant="h3" class="font-normal mb-4">
-					Interested in <span class="text-primary">{service.title.toLowerCase()}</span>?
+					Need <span class="text-primary">{service.title.toLowerCase()}</span> for your project?
 				</Typography>
 				<Typography variant="body" color="muted" class="mb-6 max-w-xl mx-auto">
 					Let us discuss your project requirements and how I can help you achieve your goals.
 				</Typography>
-				<ButtonPrimary href="/contact" icon={Arrow}>START A PROJECT</ButtonPrimary>
+				<ButtonPrimary href="/contact" icon={Arrow}>GET A FREE QUOTE</ButtonPrimary>
 			</div>
 		</article>
 	</Container>

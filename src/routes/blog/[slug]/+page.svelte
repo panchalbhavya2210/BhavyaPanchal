@@ -7,6 +7,7 @@
 	import { Calendar, Clock, Tag, ArrowLeft } from '@lucide/svelte';
 	import SeoMeta from '$lib/components/seo-meta.svelte';
 	import JsonLd from '$lib/components/json-ld.svelte';
+	import RelatedContent from '$lib/components/related-content.svelte';
 	import { breadcrumbSchema, absoluteUrl, site } from '$lib/seo';
 	import { posts } from '$lib/data/blog';
 	import Bhavya from '$lib/assets/bhavya-panchal.webp';
@@ -148,12 +149,12 @@
 				<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 					<div>
 						<Typography variant="bodySm" color="muted">
-							Written by <strong class="text-foreground">Bhavya Panchal</strong> — Frontend Developer
-							& UI Engineer
+							Written by <strong class="text-foreground">Bhavya Panchal</strong> — Freelance Frontend
+							Developer &amp; Next.js Expert
 						</Typography>
 					</div>
 					<ButtonPrimary href="/contact" variant="secondary" icon={Arrow}>
-						WORK WITH ME
+						HIRE ME FOR YOUR NEXT PROJECT
 					</ButtonPrimary>
 				</div>
 			</div>
@@ -224,6 +225,8 @@
 					</div>
 				</aside>
 			{/if}
+
+			<RelatedContent currentSlug={post.slug} type="blog" />
 		</article>
 	</Container>
 </Section>

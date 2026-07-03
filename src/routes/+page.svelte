@@ -13,14 +13,15 @@
 	import { reveal } from '$lib/actions/reveal';
 	import { revealCard } from '$lib/actions/revealCard';
 	import Accordion from '$lib/components/ui/accordion.svelte';
+	import Testimonials from '$lib/components/testimonials.svelte';
 	// import BeyondCode from '$lib/components/beyond-code.svelte';
 
 	const meta = {
-		title: `${site.name} — Frontend Developer &amp; UI Engineer | React, Next.js, Shopify Hydrogen | Ahmedabad, India`,
+		title: `${site.name} — Freelance Frontend Developer & Next.js Expert | Ahmedabad, India`,
 		description:
-			'Bhavya Panchal is a frontend developer and UI engineer from Ahmedabad, India. Specialising in React, Next.js, Remix, Shopify Hydrogen, SvelteKit, and TypeScript. 3+ years building fast, accessible, and scalable web applications. Available for freelance and full-time roles worldwide.',
+			'Bhavya Panchal is a freelance frontend developer and Next.js expert from Ahmedabad, India. Specialising in React, Next.js, SvelteKit, Shopify Hydrogen, and TypeScript. 3+ years building fast, accessible, and SEO-friendly web applications. Available for freelance and full-time roles worldwide.',
 		keywords:
-			'Bhavya Panchal, frontend developer Ahmedabad, React developer Ahmedabad, Next.js developer India, Shopify Hydrogen developer, Remix developer, UI engineer India, hire frontend developer, SvelteKit developer, TypeScript developer, freelance React developer, frontend developer Gujarat, performance optimization, Core Web Vitals',
+			'Bhavya Panchal, freelance frontend developer India, Next.js developer Ahmedabad, React developer India, SvelteKit developer, Shopify Hydrogen developer, website speed optimization, SEO friendly website developer, frontend developer Gujarat, hire Next.js developer, Figma to code developer, headless CMS developer',
 		path: '/',
 		image: site.image,
 		type: 'website'
@@ -159,19 +160,21 @@
 					ABOUT <span class="text-primary">ME.</span>
 				</Typography>
 				<Typography variant="bodyLg" color="muted" class="max-w-2xl">
-					I&rsquo;m Bhavya Panchal, a <strong>frontend developer</strong> and
-					<strong>UI engineer</strong> from Ahmedabad, India, with 3+ years of experience crafting high-performance
-					web applications. I combine design thinking with modern development practices to build products
-					that feel intuitive, perform exceptionally, and solve real business problems.
+					I&rsquo;m Bhavya Panchal, a <strong>freelance frontend developer</strong> and
+					<strong>Next.js expert</strong> from Ahmedabad, India, with 3+ years of experience crafting
+					high-performance, SEO-friendly web applications. I combine design thinking with modern
+					development practices to build products that feel intuitive, perform exceptionally, and
+					solve real business problems.
 				</Typography>
 				<Typography variant="body" color="muted" class="max-w-2xl">
 					My work spans corporate websites, e-commerce platforms built with
 					<strong>Shopify and Hydrogen</strong>, analytics dashboards, and custom web applications
 					across industries including enterprise technology, health commerce, urban mobility,
 					content platforms, and investment intelligence. I specialise in building with
-					<strong>React</strong>, <strong>Next.js</strong>, <strong>Remix</strong>, and
-					<strong>SvelteKit</strong> — choosing the right framework for each project rather than a one-size-fits-all
-					approach.
+					<strong>React</strong>, <strong>Next.js</strong>, <strong>SvelteKit</strong>, and
+					<strong>Remix</strong> — choosing the right framework for each project rather than a one-size-fits-all
+					approach. I also provide <strong>headless CMS integration</strong> with Sanity and Contentful,
+					and <strong>Figma to code conversion</strong> for design teams.
 				</Typography>
 				<Typography variant="body" color="muted" class="max-w-2xl">
 					Every project I ship targets <strong>95+ Lighthouse Performance</strong> scores and
@@ -185,7 +188,7 @@
 						>READ MORE ABOUT ME</ButtonPrimary
 					>
 					<ButtonPrimary href="/contact" variant="secondary" icon={Arrow}
-						>WORK WITH ME</ButtonPrimary
+						>HIRE ME FOR YOUR PROJECT</ButtonPrimary
 					>
 				</div>
 			</div>
@@ -197,8 +200,8 @@
 						<Typography variant="bodySm" color="muted">Years Experience</Typography>
 					</div>
 					<div class="border border-border/50 bg-white p-6 text-center" use:reveal={0.12}>
-						<Typography variant="h4" class="text-primary font-bold">6+</Typography>
-						<Typography variant="bodySm" color="muted">Projects Delivered</Typography>
+						<Typography variant="h4" class="text-primary font-bold">20+</Typography>
+						<Typography variant="bodySm" color="muted">Projects Completed</Typography>
 					</div>
 				</div>
 				<div class="space-y-4 pt-6">
@@ -208,10 +211,13 @@
 					</div>
 					<div class="border border-border/50 bg-white p-6 text-center" use:reveal={0.2}>
 						<Typography variant="h4" class="text-primary font-bold">15+</Typography>
-						<Typography variant="bodySm" color="muted">Technologies</Typography>
+						<Typography variant="bodySm" color="muted">Technologies Mastered</Typography>
 					</div>
 				</div>
 			</div>
+			<p class="text-center text-xs text-muted-foreground mt-4">
+				Trusted by businesses across India, US, UK, and Australia
+			</p>
 		</div>
 	</Container>
 </Section>
@@ -333,6 +339,8 @@
 		</div>
 	</Container>
 </Section>
+
+<Testimonials />
 
 <!-- FAQ -->
 <Section size="sm">
@@ -465,9 +473,9 @@
 				a performance audit for your existing application — I would love to hear from you.
 			</Typography>
 			<div class="flex flex-wrap justify-center gap-4 pt-2">
-				<ButtonPrimary href="/contact" icon={Arrow}>START A PROJECT</ButtonPrimary>
-				<ButtonPrimary href="/projects" variant="secondary" icon={Arrow}
-					>VIEW CASE STUDIES</ButtonPrimary
+				<ButtonPrimary href="/contact" icon={Arrow}>HIRE A NEXT.JS DEVELOPER</ButtonPrimary>
+				<ButtonPrimary href="/contact" variant="secondary" icon={Arrow}
+					>BOOK A FREE CONSULTATION</ButtonPrimary
 				>
 			</div>
 		</div>

@@ -58,11 +58,11 @@
 			<div use:reveal={0.12}>
 				<Typography variant="caption" class="mb-5 block">Expertise</Typography>
 				<div class="space-y-3">
-					<span class="block text-sm text-muted-foreground">React & Next.js</span>
-					<span class="block text-sm text-muted-foreground">SvelteKit</span>
-					<span class="block text-sm text-muted-foreground">TypeScript</span>
-					<span class="block text-sm text-muted-foreground">Performance</span>
-					<span class="block text-sm text-muted-foreground">Accessibility</span>
+					<a href="/services/react-development" class="block text-sm text-muted-foreground hover:text-primary transition-colors">React & Next.js</a>
+					<a href="/services/svelte-development" class="block text-sm text-muted-foreground hover:text-primary transition-colors">SvelteKit</a>
+					<a href="/services/shopify-development" class="block text-sm text-muted-foreground hover:text-primary transition-colors">Shopify Hydrogen</a>
+					<a href="/services/performance-optimization" class="block text-sm text-muted-foreground hover:text-primary transition-colors">Performance</a>
+					<a href="/services/technical-seo" class="block text-sm text-muted-foreground hover:text-primary transition-colors">Technical SEO</a>
 				</div>
 			</div>
 

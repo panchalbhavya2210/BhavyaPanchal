@@ -17,7 +17,7 @@ export default defineConfig({
 			adapter: adapter(),
 			preprocess: [mdsvex({ extensions: ['.svx', '.md'] })],
 			extensions: ['.svelte', '.svx', '.md'],
-			experimental: { remoteFunctions: true, handleRenderingErrors: true }
+			experimental: { handleRenderingErrors: true }
 		})
 	]
 });

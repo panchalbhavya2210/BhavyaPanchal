@@ -34,11 +34,34 @@ function getAllUrls(): string[] {
 async function submitToIndexNow(urls: string[]) {
 	const key = process.env.INDEXNOW_KEY;
 	if (!key) {
-		return { ok: false, error: 'INDEXNOW_KEY not configured' };
+		return { ok: false, error: 'INDEXNOW_KEY not configured in environment variables' };
 	}
 
 	const host = new URL(site.url).host;
 	const keyLocation = absoluteUrl(`/${key}.txt`);
+
+	// Verify key file is accessible before submitting
+	try {
+		const keyCheck = await fetch(keyLocation, { method: 'HEAD' });
+		if (!keyCheck.ok) {
+			return {
+				ok: false,
+				error: `Key file not accessible at ${keyLocation} (HTTP ${keyCheck.status}). Ensure the file exists in static/ and is deployed.`
+			};
+		}
+		const keyContent = await (await fetch(keyLocation)).text();
+		if (keyContent.trim() !== key) {
+			return {
+				ok: false,
+				error: `Key file content mismatch. Expected "${key}", got "${keyContent.trim()}".`
+			};
+		}
+	} catch {
+		return {
+			ok: false,
+			error: `Cannot access key file at ${keyLocation}. Check that the file is deployed.`
+		};
+	}
 
 	// IndexNow accepts up to 10,000 URLs per request
 	const body = JSON.stringify({
@@ -55,12 +78,13 @@ async function submitToIndexNow(urls: string[]) {
 			body
 		});
 
-		if (!res.ok) {
-			const text = await res.text();
-			return { ok: false, status: res.status, body: text };
+		// IndexNow returns 200 on success, 202 on accepted
+		if (res.ok) {
+			return { ok: true, submitted: urls.length, httpStatus: res.status };
 		}
 
-		return { ok: true, submitted: urls.length };
+		const text = await res.text();
+		return { ok: false, status: res.status, body: text };
 	} catch (err) {
 		return { ok: false, error: String(err) };
 	}

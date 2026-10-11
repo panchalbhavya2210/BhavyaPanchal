@@ -3,16 +3,15 @@
 Developer: Bhavya Panchal
 Contact: panchalbhavya2210@gmail.com
 Location: Ahmedabad, Gujarat, India
-Twitter: @bhavyapanchal
-GitHub: bhavyapanchal2210
+GitHub: panchalbhavya2210
 LinkedIn: bhavyapanchal
 
 /* SITE */
 
-Last update: 2026-06-14
+Last update: 2026-10-11
 Language: English (India)
 Standards: HTML5, CSS3, WCAG 2.2 AA
-Components: SvelteKit, TypeScript, GSAP, Tailwind CSS
+Components: SvelteKit, TypeScript, Tailwind CSS
 Hosting: Vercel
 
 /* THANKS */

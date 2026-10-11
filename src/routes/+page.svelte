@@ -1,485 +1,385 @@
 <script lang="ts">
-	import Banner from '$lib/components/banner.svelte';
-	import Container from '$lib/components/ui/container.svelte';
-	import Section from '$lib/components/ui/section.svelte';
-	import SectionHeader from '$lib/components/ui/section-header.svelte';
-	import Typography from '$lib/components/ui/typography.svelte';
-	import ButtonPrimary from '$lib/components/ui/button-primary.svelte';
-	import Arrow from '@lucide/svelte/icons/arrow-up-right';
-	import SeoMeta from '$lib/components/seo-meta.svelte';
-	import JsonLd from '$lib/components/json-ld.svelte';
-	import { site, webSiteSchema, personSchema, organizationSchema, portfolioSchema } from '$lib/seo';
-	import { featuredProject, projects } from '$lib/data/projects';
-	import { reveal } from '$lib/actions/reveal';
-	import { revealCard } from '$lib/actions/revealCard';
-	import Accordion from '$lib/components/ui/accordion.svelte';
-	import Testimonials from '$lib/components/testimonials.svelte';
-	// import BeyondCode from '$lib/components/beyond-code.svelte';
+	import { site, personSchema, webSiteSchema } from '$lib/seo';
+	import { selectedProjects } from '$lib/data/projects';
 
-	const meta = {
-		title: `${site.name} — Freelance Frontend Developer & Next.js Expert | Ahmedabad, India`,
-		description:
-			'Bhavya Panchal is a freelance frontend developer and Next.js expert from Ahmedabad, India. Specialising in React, Next.js, SvelteKit, Shopify Hydrogen, and TypeScript. 3+ years building fast, accessible, and SEO-friendly web applications. Available for freelance and full-time roles worldwide.',
-		keywords:
-			'Bhavya Panchal, freelance frontend developer India, Next.js developer Ahmedabad, React developer India, SvelteKit developer, Shopify Hydrogen developer, website speed optimization, SEO friendly website developer, frontend developer Gujarat, hire Next.js developer, Figma to code developer, headless CMS developer',
-		path: '/',
-		image: site.image,
-		type: 'website'
-	} as const;
-
-	const capabilities = [
+	const skillGroups = [
 		{
-			title: 'Frontend Development',
-			icon: '⚛️',
-			description:
-				'I build performant, accessible web applications using React, Next.js, Remix, and SvelteKit. From single-page applications to server-rendered platforms, I architect solutions that balance developer experience with end-user performance. My approach covers component architecture, state management, API integration, and comprehensive testing strategies. Every project ships with measurable performance targets — consistently achieving 95+ Lighthouse scores.'
+			label: 'Frontend',
+			items: [
+				'JavaScript',
+				'TypeScript',
+				'React',
+				'Next.js',
+				'Svelte',
+				'HTML & CSS',
+				'Tailwind CSS'
+			]
 		},
 		{
-			title: 'UI Engineering',
-			icon: '🎨',
-			description:
-				'I design and implement scalable component libraries, design systems, and pixel-perfect interfaces that empower teams to ship consistently. Using tools like Tailwind CSS, GSAP, and Framer Motion, I create reusable, accessible UI primitives with comprehensive documentation. My design systems reduce development time by 30-40% while ensuring visual consistency across entire product suites.'
+			label: 'Interface',
+			items: [
+				'Responsive design',
+				'Component-based development',
+				'Figma-to-code',
+				'Accessible interfaces'
+			]
 		},
 		{
-			title: 'Performance Optimization',
-			icon: '⚡',
-			description:
-				'I conduct in-depth Core Web Vitals audits, bundle analysis, and rendering optimization to keep applications fast and responsive. From reducing JavaScript payloads through code splitting and tree shaking to implementing optimal image strategies and caching patterns, I systematically identify and eliminate performance bottlenecks. Typical outcomes include 40-60% reductions in page load times and zero Cumulative Layout Shift.'
-		},
-		{
-			title: 'Technical SEO & Accessibility',
-			icon: '🔍',
-			description:
-				'I implement semantic HTML, structured data, and WCAG 2.1 AA compliance to ensure applications are discoverable by search engines and usable by everyone. My workflow includes automated accessibility testing, keyboard navigation audits, screen reader verification, and comprehensive schema.org implementation. Accessible, SEO-friendly code is not an afterthought — it is foundational to every project I deliver.'
+			label: 'Tools & integrations',
+			items: ['Git', 'REST APIs', 'Firebase', 'Supabase', 'Appwrite', 'Third-party services']
 		}
-	];
+	].map((group) => ({ ...group, text: group.items.join(' · ') }));
 
-	const technologies = [
-		'React',
-		'Next.js',
-		'SvelteKit',
-		'TypeScript',
-		'JavaScript',
-		'Tailwind CSS',
-		'GSAP',
-		'Node.js',
-		'Sanity CMS',
-		'Firebase',
-		'Supabase',
-		'Git'
-	];
+	const structuredData = {
+		'@context': 'https://schema.org',
+		'@graph': [personSchema(), webSiteSchema()]
+	};
+
+	// JSON-LD is assembled from characters so the source never contains literal
+	// script tag sequences (which would terminate this component's script block).
+	// SvelteKit prerenders the page, so the tag lands verbatim in the static <head>.
+	const lt = String.fromCharCode(60);
+	const jsonLd =
+		lt + 'script type="application/ld+json">' + JSON.stringify(structuredData) + lt + '/script>';
 </script>
 
-<SeoMeta {meta} />
-<JsonLd
-	schemas={[
-		webSiteSchema(),
-		personSchema(),
-		organizationSchema(),
-		portfolioSchema(),
-		{
-			'@type': 'FAQPage',
-			mainEntity: [
-				{
-					'@type': 'Question',
-					name: 'What do I specialise in?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'I specialise in frontend development and UI engineering — building fast, accessible web applications with React, Next.js, Remix, SvelteKit, and TypeScript. Deep experience with Shopify Hydrogen for headless commerce, performance optimization (Core Web Vitals), and technical SEO. Based in Ahmedabad, India, serving clients worldwide.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'What frontend technologies do I use?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Core stack: React, Next.js, Remix, SvelteKit, TypeScript, JavaScript, Tailwind CSS, GSAP, Framer Motion. Backend/data: Node.js, Express, Firebase, Supabase, Appwrite, MongoDB. E-commerce: Shopify, Liquid, Hydrogen. CMS: Sanity.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'Do I build Shopify Hydrogen stores?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Yes — custom Shopify Hydrogen storefronts for headless commerce including performant, SEO-optimised product pages, collections, cart functionality, and checkout experiences. Also experienced with traditional Shopify theme development using Liquid.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'Do I optimise Core Web Vitals?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Yes. Core Web Vitals optimization is central to my development process. Includes Lighthouse audits, JavaScript bundle analysis, code splitting, lazy loading, image and font optimization, and CLS elimination. Projects consistently achieve 95+ Performance scores with zero CLS.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'Am I available for freelance work?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Yes — available for freelance and contract projects working with startups, agencies, and enterprises on React, Next.js, Shopify Hydrogen, and performance optimization. Also open to full-time opportunities. Contact via the website form or email.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'Do I develop React and Next.js applications?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Yes — React and Next.js are my primary frameworks. I build single-page applications with React and server-rendered, statically-generated, and incrementally-regenerated pages with Next.js. Covers App Router, Server Components, API routes, middleware, and the complete ecosystem.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'Where am I located and do I work remotely?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Based in Ahmedabad, Gujarat, India. I work remotely with clients across India and worldwide — including the US, UK, Europe, and Australia. Comfortable with async communication, timezone coordination, and remote-first collaboration workflows.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'What makes me different from other frontend developers?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Three differentiators: First, measurable performance targets (95+ Lighthouse, zero CLS). Second, accessibility and technical SEO are foundational, not optional. Third, framework-agnostic — production experience with React, Next.js, Remix, SvelteKit, and Shopify Hydrogen, recommending the best tool per project.'
-					}
-				}
-			]
-		}
-	]}
-/>
+<svelte:head>
+	<title>{site.title}</title>
+	<meta name="description" content={site.description} />
+	<link rel="canonical" href={`${site.url}/`} />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content={site.name} />
+	<meta property="og:title" content={site.title} />
+	<meta property="og:description" content={site.description} />
+	<meta property="og:url" content={`${site.url}/`} />
+	<meta property="og:image" content={`${site.url}${site.ogImage}`} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Bhavya Panchal — Frontend Developer" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={site.title} />
+	<meta name="twitter:description" content={site.description} />
+	<meta name="twitter:image" content={`${site.url}${site.ogImage}`} />
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- markup is built from JSON.stringify of hard-coded schema data, never user input -->
+	{@html jsonLd}
+</svelte:head>
 
-<Banner />
+<article class="sheet" id="top">
+	<!-- ── masthead ──────────────────────────────────────────────────── -->
+	<header class="masthead">
+		<p class="masthead-name">{site.name}</p>
+		<p class="masthead-meta">
+			Frontend Developer <span aria-hidden="true">·</span> Ahmedabad, India
+		</p>
+	</header>
 
-<!-- Stats + Intro -->
-<Section size="sm" class="bg-white">
-	<Container size="full">
-		<div class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-			<div class="space-y-6">
-				<Typography variant="h2" class="font-normal" animate>
-					ABOUT <span class="text-primary">ME.</span>
-				</Typography>
-				<Typography variant="bodyLg" color="muted" class="max-w-2xl">
-					I&rsquo;m Bhavya Panchal, a <strong>freelance frontend developer</strong> and
-					<strong>Next.js expert</strong> from Ahmedabad, India, with 3+ years of experience crafting
-					high-performance, SEO-friendly web applications. I combine design thinking with modern
-					development practices to build products that feel intuitive, perform exceptionally, and
-					solve real business problems.
-				</Typography>
-				<Typography variant="body" color="muted" class="max-w-2xl">
-					My work spans corporate websites, e-commerce platforms built with
-					<strong>Shopify and Hydrogen</strong>, analytics dashboards, and custom web applications
-					across industries including enterprise technology, health commerce, urban mobility,
-					content platforms, and investment intelligence. I specialise in building with
-					<strong>React</strong>, <strong>Next.js</strong>, <strong>SvelteKit</strong>, and
-					<strong>Remix</strong> — choosing the right framework for each project rather than a one-size-fits-all
-					approach. I also provide <strong>headless CMS integration</strong> with Sanity and Contentful,
-					and <strong>Figma to code conversion</strong> for design teams.
-				</Typography>
-				<Typography variant="body" color="muted" class="max-w-2xl">
-					Every project I ship targets <strong>95+ Lighthouse Performance</strong> scores and
-					<strong>WCAG 2.1 AA accessibility compliance</strong>. I implement semantic HTML,
-					structured data, and Core Web Vitals optimization as foundational practices — not
-					afterthoughts. Currently building at <strong>SolePoint Solutions</strong> in Ahmedabad, I am
-					available for freelance and full-time opportunities worldwide.
-				</Typography>
-				<div class="flex flex-wrap gap-4 pt-2">
-					<ButtonPrimary href="/about-me" variant="secondary" icon={Arrow}
-						>READ MORE ABOUT ME</ButtonPrimary
-					>
-					<ButtonPrimary href="/contact" variant="secondary" icon={Arrow}
-						>HIRE ME FOR YOUR PROJECT</ButtonPrimary
-					>
-				</div>
+	<!-- ── introduction ─────────────────────────────────────────────── -->
+	<section class="hero" aria-labelledby="hero-title">
+		<p class="kicker"><span class="kicker-line" aria-hidden="true"></span>Frontend Developer</p>
+
+		<h1 id="hero-title" class="hero-title">
+			I build<br class="narrow-break" />
+			<em class="accent">thoughtful things</em><br class="wide-break" /> for the web.
+		</h1>
+
+		<div class="hero-foot">
+			<div>
+				<p class="hero-lead">
+					I turn designs into responsive, working interfaces, paying attention to the small details
+					that make a website feel complete.
+				</p>
+				<p class="hero-cta">
+					<a class="tlink tlink--down" href="#work">
+						Explore selected work
+						<svg
+							width="13"
+							height="13"
+							viewBox="0 0 14 14"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+							focusable="false"
+						>
+							<path d="M3.4 3.4 10.6 10.6" />
+							<path d="M10.6 5.4v5.2H5.4" />
+						</svg>
+					</a>
+				</p>
 			</div>
 
-			<div class="grid grid-cols-2 gap-4">
-				<div class="space-y-4">
-					<div class="border border-border/50 bg-white p-6 text-center" use:reveal={0}>
-						<Typography variant="h4" class="text-primary font-bold">3+</Typography>
-						<Typography variant="bodySm" color="muted">Years Experience</Typography>
-					</div>
-					<div class="border border-border/50 bg-white p-6 text-center" use:reveal={0.12}>
-						<Typography variant="h4" class="text-primary font-bold">20+</Typography>
-						<Typography variant="bodySm" color="muted">Projects Completed</Typography>
-					</div>
-				</div>
-				<div class="space-y-4 pt-6">
-					<div class="border border-border/50 bg-white p-6 text-center" use:reveal={0.08}>
-						<Typography variant="h4" class="text-primary font-bold">95+</Typography>
-						<Typography variant="bodySm" color="muted">Avg Lighthouse Score</Typography>
-					</div>
-					<div class="border border-border/50 bg-white p-6 text-center" use:reveal={0.2}>
-						<Typography variant="h4" class="text-primary font-bold">15+</Typography>
-						<Typography variant="bodySm" color="muted">Technologies Mastered</Typography>
-					</div>
-				</div>
-			</div>
-			<p class="text-center text-xs text-muted-foreground mt-4">
-				Trusted by businesses across India, US, UK, and Australia
+			<figure class="hero-figure" aria-hidden="true">
+				<svg
+					class="hero-sketch"
+					viewBox="0 0 200 126"
+					fill="none"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					focusable="false"
+				>
+					<g class="sketch-frame">
+						<path
+							d="M14 7.4C56 6.2 142 6.2 185 7.6c3 .2 5 2.3 5.2 5.4.7 30 .6 64 0 96-.1 3.4-2.2 5.4-5.4 5.6-50 1.6-118 1.4-169 .2-3.4-.1-5.3-2.2-5.4-5.5-.7-32-.7-66 0-96C10.5 9.8 11.9 7.7 14 7.4Z"
+						/>
+						<path d="M9.4 27.6c60-1 121-.8 181.2.2" />
+						<circle cx="20.5" cy="17.2" r="2.3" />
+						<circle cx="29.5" cy="17.2" r="2.3" />
+					</g>
+					<g class="sketch-content">
+						<path d="M24 45.5c22-1 51-.8 76-.2" stroke-width="2.2" />
+						<path d="M24 56.5c19-.7 38-.5 56 .1" />
+						<path d="M24 65.5c16-.6 31-.4 45 .2" />
+						<rect x="24" y="76" width="72" height="31" rx="2" transform="rotate(-0.7 60 91.5)" />
+						<path d="M28 80.5l64 22" />
+						<path d="M92 80.5l-64 22" />
+						<path d="M112 85c18-.8 38-.6 56 .1" />
+						<path d="M112 95c13-.6 28-.4 40 .1" />
+						<rect
+							x="112"
+							y="102.5"
+							width="38"
+							height="12"
+							rx="4"
+							transform="rotate(-0.5 131 108.5)"
+						/>
+					</g>
+					<g class="sketch-select">
+						<rect
+							x="18"
+							y="70"
+							width="84"
+							height="42"
+							rx="2"
+							stroke-dasharray="3.5 3.5"
+							transform="rotate(-0.7 60 91)"
+						/>
+						<rect class="sketch-handle" x="15.5" y="67.5" width="5" height="5" rx="0.8" />
+						<rect class="sketch-handle" x="99.5" y="67.5" width="5" height="5" rx="0.8" />
+						<rect class="sketch-handle" x="15.5" y="109.5" width="5" height="5" rx="0.8" />
+						<rect class="sketch-handle" x="99.5" y="109.5" width="5" height="5" rx="0.8" />
+						<path class="sketch-cursor" d="M96 104l6.6 16.2 2.5-6.5 6.5-1.2Z" />
+					</g>
+				</svg>
+				<figcaption class="sketch-note">
+					<svg
+						class="sketch-arrow"
+						viewBox="0 0 30 26"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.4"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						focusable="false"
+					>
+						<path d="M28 24C19 21.4 9.5 15.5 5 4.5" />
+						<path d="M5 4.5c.4 2.7 1.3 5 2.7 6.9" />
+						<path d="M5 4.5c2.7.3 5 .9 7 1.9" />
+					</svg>
+					<span class="sketch-text">placed by hand</span>
+				</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<!-- ── 01 · about ───────────────────────────────────────────────── -->
+	<section id="about" class="chapter" aria-labelledby="about-title">
+		<div class="about-head">
+			<p class="kicker">
+				<span class="kicker-num">01</span>
+				<span class="kicker-sep" aria-hidden="true">/</span>
+				A little about me
+			</p>
+			<h2 id="about-title" class="section-title">Design files in. Working interfaces out.</h2>
+
+			<svg class="about-orbit" viewBox="0 0 76 50" fill="none" aria-hidden="true" focusable="false">
+				<path
+					d="M13 25.5C13 14.5 28.5 6.5 45.5 7.5c15.5.9 26 8 25 16.8-1 8.7-15.5 17-32.5 17C21.5 41 13.2 33.8 13 25.5Z"
+					stroke="currentColor"
+					stroke-width="1.3"
+				/>
+				<circle cx="62.5" cy="13" r="2.6" fill="currentColor" stroke="none" />
+			</svg>
+		</div>
+
+		<div class="about-body">
+			<p class="body-copy">
+				I'm a frontend developer based in Ahmedabad, India. I enjoy turning design files into
+				working interfaces, exploring how products fit together, and paying attention to the details
+				that make a website feel complete.
+			</p>
+			<p class="about-fact">
+				So far that's meant <span class="about-fact-num">20+</span> websites built from Figma and PSD
+				designs.
 			</p>
 		</div>
-	</Container>
-</Section>
+	</section>
 
-<!-- Capabilities -->
-<Section size="sm" class="">
-	<Container size="full">
-		<SectionHeader align="row" margin="xl">
-			<Typography variant="h2" class="font-normal" animate>
-				WHAT I <span class="text-primary">DO.</span>
-			</Typography>
-			{#snippet description()}
-				<Typography variant="body" color="muted">
-					As a <strong>frontend developer</strong> and <strong>UI engineer</strong> based in Ahmedabad,
-					India, I deliver production-grade applications that are fast, accessible, and search-engine
-					friendly. Here is how I can help your business.
-				</Typography>
-			{/snippet}
-		</SectionHeader>
+	<!-- ── 02 · skills ──────────────────────────────────────────────── -->
+	<section id="skills" class="chapter" aria-labelledby="skills-title">
+		<p class="kicker">
+			<span class="kicker-num">02</span>
+			<span class="kicker-sep" aria-hidden="true">/</span>
+			What I work with
+		</p>
+		<h2 id="skills-title" class="section-title">A small, honest toolkit.</h2>
 
-		<div class="grid gap-6 sm:grid-cols-2">
-			{#each capabilities as cap, i (cap.title)}
-				<div class="border border-border/50 bg-white p-8" use:reveal={i * 0.08}>
-					<Typography variant="h4" class="mb-3 font-medium">{cap.title}</Typography>
-					<Typography variant="body" color="muted">{cap.description}</Typography>
+		<dl class="skills-index">
+			{#each skillGroups as group (group.label)}
+				<div class="skill-row">
+					<dt class="skill-label">{group.label}</dt>
+					<dd class="skill-items">{group.text}</dd>
 				</div>
 			{/each}
-		</div>
-	</Container>
-</Section>
+		</dl>
+	</section>
 
-<!-- Featured Projects -->
-<Section size="sm">
-	<Container size="full">
-		<SectionHeader align="row" margin="xl">
-			<Typography variant="h2" class="font-normal" animate>
-				FEATURED <span class="text-primary">PROJECTS.</span>
-			</Typography>
-			{#snippet description()}
-				Selected work across corporate websites, e-commerce, analytics dashboards, and custom web
-				applications.
-			{/snippet}
-		</SectionHeader>
+	<!-- ── 03 · selected work ───────────────────────────────────────── -->
+	<section id="work" class="chapter" aria-labelledby="work-title">
+		<p class="kicker">
+			<span class="kicker-num">03</span>
+			<span class="kicker-sep" aria-hidden="true">/</span>
+			Selected work
+		</p>
+		<h2 id="work-title" class="section-title">Things I've built.</h2>
 
-		<div class="grid gap-6 lg:grid-cols-3">
-			{#each [featuredProject, ...projects].slice(0, 3) as project, i (project.id)}
-				<a
-					href={project.href || `/projects/${project.id}`}
-					class="group border border-border/50 bg-white hover:border-primary/30 transition-colors"
-					use:revealCard={i}
-				>
-					<div class="aspect-5/3 overflow-hidden">
-						<img
-							src={project.image}
-							alt={`${project.title} — project by Bhavya Panchal, frontend developer`}
-							class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-							loading="lazy"
-							width="600"
-							height="360"
-						/>
+		<ol class="worklist">
+			{#each selectedProjects as project, index (project.id)}
+				<li class="work-row">
+					<span class="work-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+					<div>
+						<h3 class="work-title">
+							{#if project.href}
+								<a
+									class="project-link"
+									href={project.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`${project.title} — opens in a new tab`}
+								>
+									<span>{project.title}</span>&nbsp;<svg
+										viewBox="0 0 12 12"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.6"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+										focusable="false"
+									>
+										<path d="M2.5 9.5 9.5 2.5" />
+										<path d="M4 2.5h5.5V8" />
+									</svg>
+								</a>
+							{:else}
+								{project.title}
+							{/if}
+						</h3>
+						<p class="work-desc">{project.description}</p>
+						<p class="work-stack">{project.stack.join(' · ')}</p>
 					</div>
-					<div class="p-6 space-y-3">
-						<div
-							class="flex flex-wrap gap-2 text-[11px] uppercase tracking-wider text-muted-foreground"
-						>
-							{#each project.stack as tech, i (i)}
-								<span>{tech}</span>
-								{#if i < project.stack.length - 1}
-									<span class="text-primary">·</span>
-								{/if}
-							{/each}
-						</div>
-						<Typography variant="h4" class="font-medium group-hover:text-primary transition-colors">
-							{project.title}
-						</Typography>
-						<Typography variant="bodySm" color="muted">{project.description}</Typography>
-						<div class="flex flex-wrap gap-x-3 gap-y-1 pt-1">
-							{#each project.outcomes.slice(0, 2) as outcome (outcome)}
-								<span class="text-xs text-primary/80">{outcome}</span>
-							{/each}
-						</div>
-					</div>
+				</li>
+			{/each}
+		</ol>
+	</section>
+
+	<!-- ── 04 · contact ─────────────────────────────────────────────── -->
+	<section id="contact" class="chapter" aria-labelledby="contact-title">
+		<p class="kicker">
+			<span class="kicker-num">04</span>
+			<span class="kicker-sep" aria-hidden="true">/</span>
+			Say hello
+		</p>
+		<h2 id="contact-title" class="section-title">Have something in mind?</h2>
+		<p class="body-copy contact-copy">
+			For projects, questions, or a good conversation about the web, feel free to reach out.
+		</p>
+
+		<ul class="contact-links">
+			<li>
+				<a class="tlink" href={`mailto:${site.email}`}>
+					{site.email}
+					<svg
+						width="12"
+						height="12"
+						viewBox="0 0 12 12"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.6"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+						focusable="false"
+					>
+						<path d="M2.5 9.5 9.5 2.5" />
+						<path d="M4 2.5h5.5V8" />
+					</svg>
 				</a>
-			{/each}
-		</div>
+			</li>
+			<li>
+				<a class="tlink" href={site.github} target="_blank" rel="noopener noreferrer">
+					GitHub
+					<svg
+						width="12"
+						height="12"
+						viewBox="0 0 12 12"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.6"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+						focusable="false"
+					>
+						<path d="M2.5 9.5 9.5 2.5" />
+						<path d="M4 2.5h5.5V8" />
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a class="tlink" href={site.linkedin} target="_blank" rel="noopener noreferrer">
+					LinkedIn
+					<svg
+						width="12"
+						height="12"
+						viewBox="0 0 12 12"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.6"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+						focusable="false"
+					>
+						<path d="M2.5 9.5 9.5 2.5" />
+						<path d="M4 2.5h5.5V8" />
+					</svg>
+				</a>
+			</li>
+		</ul>
+	</section>
 
-		<div class="mt-10 text-center">
-			<ButtonPrimary href="/projects" variant="secondary" icon={Arrow}>
-				VIEW ALL PROJECTS
-			</ButtonPrimary>
-		</div>
-	</Container>
-</Section>
-
-<!-- Tech Stack -->
-<Section size="sm" class="bg-white">
-	<Container size="full">
-		<SectionHeader align="row" margin="xl">
-			<Typography variant="h2" class="font-normal" animate>
-				TECH <span class="text-primary">STACK.</span>
-			</Typography>
-			{#snippet description()}
-				<Typography variant="body" color="muted">
-					As a <strong>TypeScript developer</strong> and <strong>Next.js developer</strong>, I work
-					across the modern frontend ecosystem — from frameworks to CMS and backend tools.
-				</Typography>
-			{/snippet}
-		</SectionHeader>
-
-		<div class="flex flex-wrap gap-3">
-			{#each technologies as tech, i (tech)}
-				<span
-					class="border border-border/60 px-5 py-3 text-sm font-medium transition-all hover:border-primary hover:text-primary hover:bg-primary/5 cursor-default"
-					use:reveal={i * 0.04}
-				>
-					{tech}
-				</span>
-			{/each}
-		</div>
-	</Container>
-</Section>
-
-<Testimonials />
-
-<!-- FAQ -->
-<Section size="sm">
-	<Container size="full">
-		<SectionHeader align="row" margin="xl">
-			<Typography variant="h2" class="font-normal" animate>
-				FREQUENTLY ASKED <span class="text-primary">QUESTIONS.</span>
-			</Typography>
-			{#snippet description()}
-				<Typography variant="body" color="muted">
-					Quick answers about my services, expertise, and availability as a
-					<strong>frontend developer</strong> in Ahmedabad, India.
-				</Typography>
-			{/snippet}
-		</SectionHeader>
-
-		<div class="grid gap-4 sm:grid-cols-2">
-			<div use:reveal={0}>
-				<Accordion>
-					{#snippet summary()}What do I specialise in?{/snippet}
-					{#snippet content()}
-						I specialise in frontend development and UI engineering — building fast, accessible web
-						applications with React, Next.js, Remix, SvelteKit, and TypeScript. I also have deep
-						experience with Shopify Hydrogen for headless commerce, performance optimization (Core
-						Web Vitals), and technical SEO. Based in Ahmedabad, India, I serve clients worldwide.
-					{/snippet}
-				</Accordion>
-			</div>
-
-			<div use:reveal={0.04}>
-				<Accordion>
-					{#snippet summary()}What frontend technologies do I use?{/snippet}
-					{#snippet content()}
-						My core stack includes React, Next.js, Remix, SvelteKit, TypeScript, JavaScript,
-						Tailwind CSS, GSAP, and Framer Motion. For backend and data, I work with Node.js,
-						Express, Firebase, Supabase, Appwrite, and MongoDB. For e-commerce, I build with
-						Shopify, Liquid, and Hydrogen. For CMS-driven sites, I use Sanity. I select the right
-						tool for each project rather than forcing a single stack.
-					{/snippet}
-				</Accordion>
-			</div>
-
-			<div use:reveal={0.08}>
-				<Accordion>
-					{#snippet summary()}Do I build Shopify Hydrogen stores?{/snippet}
-					{#snippet content()}
-						Yes — I build custom Shopify Hydrogen storefronts for headless commerce. This includes
-						creating performant, SEO-optimised product pages, collections, cart functionality, and
-						checkout experiences using Hydrogen and Oxygen. I also have experience with traditional
-						Shopify theme development using Liquid for clients who prefer a non-headless approach.
-					{/snippet}
-				</Accordion>
-			</div>
-
-			<div use:reveal={0.12}>
-				<Accordion>
-					{#snippet summary()}Do I optimise Core Web Vitals?{/snippet}
-					{#snippet content()}
-						Absolutely. Core Web Vitals optimization is central to my development process. I conduct
-						Lighthouse audits, analyse JavaScript bundles, implement code splitting and lazy
-						loading, optimise images and fonts, and eliminate layout shift. My projects consistently
-						achieve 95+ Performance scores with zero CLS and sub-second FCP.
-					{/snippet}
-				</Accordion>
-			</div>
-
-			<div use:reveal={0.16}>
-				<Accordion>
-					{#snippet summary()}Am I available for freelance work?{/snippet}
-					{#snippet content()}
-						Yes, I am available for freelance and contract projects. I work with startups, agencies,
-						and enterprises on React, Next.js, Shopify Hydrogen, and performance optimization
-						engagements. I am also open to full-time opportunities. You can reach me through the
-						<a href="/contact" class="text-primary hover:underline">contact form</a>
-						or at panchalbhavya2210@gmail.com.
-					{/snippet}
-				</Accordion>
-			</div>
-
-			<div use:reveal={0.2}>
-				<Accordion>
-					{#snippet summary()}Do I develop React and Next.js applications?{/snippet}
-					{#snippet content()}
-						Yes — React and Next.js are my primary frameworks for full-stack frontend development. I
-						build everything from single-page applications with React to server-rendered,
-						statically-generated, and incrementally-regenerated pages with Next.js. My expertise
-						covers the App Router, Server Components, API routes, middleware, and the complete
-						Next.js ecosystem.
-					{/snippet}
-				</Accordion>
-			</div>
-
-			<div use:reveal={0.24}>
-				<Accordion>
-					{#snippet summary()}Where am I located and do I work remotely?{/snippet}
-					{#snippet content()}
-						I am based in Ahmedabad, Gujarat, India. I work remotely with clients across India and
-						worldwide — including the US, UK, Europe, and Australia. I am comfortable with async
-						communication, timezone coordination, and remote-first collaboration workflows.
-					{/snippet}
-				</Accordion>
-			</div>
-
-			<div use:reveal={0.28}>
-				<Accordion>
-					{#snippet summary()}What makes me different from other frontend developers?{/snippet}
-					{#snippet content()}
-						Three things set my work apart: First, I ship with measurable performance targets —
-						every project achieves 95+ Lighthouse and zero CLS. Second, I treat accessibility and
-						technical SEO as foundational, not optional. Third, I am framework-agnostic — I have
-						production experience with React, Next.js, Remix, SvelteKit, and Shopify Hydrogen, so I
-						recommend the best tool for your specific needs rather than the one I am most
-						comfortable with.
-					{/snippet}
-				</Accordion>
-			</div>
-		</div>
-	</Container>
-</Section>
-
-<!-- Final CTA -->
-<Section size="sm" class="bg-white">
-	<Container size="full">
-		<div class="text-center max-w-2xl mx-auto space-y-6">
-			<Typography variant="h2" class="font-normal" animate>
-				READY TO BUILD SOMETHING <span class="text-primary">GREAT?</span>
-			</Typography>
-			<Typography variant="bodyLg" color="muted">
-				Whether you need a React developer for your next product, a Shopify Hydrogen storefront, or
-				a performance audit for your existing application — I would love to hear from you.
-			</Typography>
-			<div class="flex flex-wrap justify-center gap-4 pt-2">
-				<ButtonPrimary href="/contact" icon={Arrow}>HIRE A NEXT.JS DEVELOPER</ButtonPrimary>
-				<ButtonPrimary href="/contact" variant="secondary" icon={Arrow}
-					>BOOK A FREE CONSULTATION</ButtonPrimary
-				>
-			</div>
-		</div>
-	</Container>
-</Section>
-
-<!-- <BeyondCode /> -->
+	<!-- ── colophon ─────────────────────────────────────────────────── -->
+	<footer class="colophon">
+		<p>© 2026 Bhavya Panchal</p>
+		<a class="tlink" href="#top">
+			Back to top
+			<svg
+				width="12"
+				height="12"
+				viewBox="0 0 14 14"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+				focusable="false"
+			>
+				<path d="M7 11.6V2.6" />
+				<path d="M3.4 6.2 7 2.6l3.6 3.6" />
+			</svg>
+		</a>
+	</footer>
+</article>

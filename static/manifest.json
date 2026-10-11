@@ -1,13 +1,13 @@
 {
-	"name": "Bhavya Panchal — Frontend Developer & UI Engineer",
+	"name": "Bhavya Panchal — Frontend Developer",
 	"short_name": "Bhavya Panchal",
-	"description": "Portfolio of Bhavya Panchal, a frontend developer & UI engineer from Ahmedabad, India.",
+	"description": "Portfolio of Bhavya Panchal, a frontend developer based in Ahmedabad, India.",
 	"start_url": "/",
 	"scope": "/",
 	"display": "minimal-ui",
 	"orientation": "any",
-	"theme_color": "#d0c8ca",
-	"background_color": "#ffffff",
+	"theme_color": "#11100f",
+	"background_color": "#11100f",
 	"lang": "en-IN",
 	"dir": "ltr",
 	"icons": [
@@ -30,22 +30,5 @@
 			"purpose": "any"
 		}
 	],
-	"categories": ["portfolio", "development", "technology"],
-	"shortcuts": [
-		{
-			"name": "About Me",
-			"short_name": "About",
-			"url": "/about-me"
-		},
-		{
-			"name": "Projects",
-			"short_name": "Projects",
-			"url": "/projects"
-		},
-		{
-			"name": "Contact",
-			"short_name": "Contact",
-			"url": "/contact"
-		}
-	]
+	"categories": ["portfolio", "development", "technology"]
 }
